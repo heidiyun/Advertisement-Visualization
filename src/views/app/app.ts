@@ -5,10 +5,31 @@ import Table from "@/components/table";
 import LineGraph from "@/components/lineGraph";
 import ScatterPlot from "@/components/scatterPlot";
 
+import moment from "moment";
+
 Vue.use(Antd);
 Vue.component("table", Table);
 Vue.component("line-graph", LineGraph);
 Vue.component("scatter-plot", ScatterPlot);
 
 @Component({})
-export default class App extends Vue {}
+export default class App extends Vue {
+  public momentRange: moment.Moment[] = [];
+
+  public onChange(date: moment.Moment[], dateString: string[]) {
+    console.log(date);
+    // this.momentRange = [moment(dateString, 'YYYY-MM-DD'), moment(dateString, 'YYYY-MM-DD')];
+    this.momentRange = date;
+  }
+
+  public handleMenuClick(e: any) {
+    console.log("click", e);
+  }
+
+  public created() {
+    this.momentRange = [
+      moment("2015-01-01", "YYYY-MM-DD"),
+      moment("2015-01-31", "YYYY-MM-DD")
+    ];
+  }
+}
