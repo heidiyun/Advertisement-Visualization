@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div class="scatter-plot-wrapper">
+    <div class="scatter-plot" id="scatter-plot"></div>
+  </div>
 </template>
 
 <script src="./scatterPlot.ts"></script>
