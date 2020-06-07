@@ -1,3 +1,3 @@
-import Table from "./table.vue";
+import AdsetTable from "./table.vue";
 
-export default Table;
+export default AdsetTable;

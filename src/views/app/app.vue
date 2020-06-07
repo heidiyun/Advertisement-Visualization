@@ -37,7 +37,7 @@
         <line-graph></line-graph>
       </v-layout>
       <v-layout class="visualizations mr-b-16" style="height: 320px">
-        <table></table>
+        <adset-table></adset-table>
       </v-layout>
     </div>
   </div>

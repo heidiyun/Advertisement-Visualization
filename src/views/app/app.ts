@@ -1,14 +1,14 @@
 import { Vue, Component } from "vue-property-decorator";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
-import Table from "@/components/table";
+import AdsetTable from "@/components/table";
 import LineGraph from "@/components/lineGraph";
 import ScatterPlot from "@/components/scatterPlot";
 
 import moment from "moment";
 
 Vue.use(Antd);
-Vue.component("table", Table);
+Vue.component("adset-table", AdsetTable);
 Vue.component("line-graph", LineGraph);
 Vue.component("scatter-plot", ScatterPlot);
 
