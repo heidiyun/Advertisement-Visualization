@@ -3,7 +3,15 @@ import * as d3 from "d3";
 
 @Component({})
 export default class ScatterPlot extends Vue {
-  private data: number[] = [1, 2, 3, 10];
+  private data: number[] = [
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100
+  ];
 
   private margin: {
     top: number;
@@ -17,6 +25,7 @@ export default class ScatterPlot extends Vue {
   private svg: any;
   private x: any;
   private y: any;
+  private tooltip: any;
 
   private mounted() {
     // svg 생성
@@ -30,6 +39,12 @@ export default class ScatterPlot extends Vue {
         "transform",
         "translate(" + this.margin.left + "," + this.margin.top + ")"
       );
+
+    this.tooltip = d3
+      .select("#scatter-plot")
+      .append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
     // x 축 그리기
     this.x = d3
@@ -58,10 +73,26 @@ export default class ScatterPlot extends Vue {
       .data(this.data)
       .enter()
       .append("circle")
-      .attr("cx", (d: number) => d)
-      .attr("cy", (d: number) => d)
-      .attr("r", 1.5)
-      .style("fill", "red");
+      .attr("cx", (d: number) => this.x(d))
+      .attr("cy", (d: number) => this.y(d))
+      .attr("r", 5)
+      .style("fill", "red")
+      .on("mouseover", (d: number) => {
+        this.tooltip
+          .transition()
+          .duration(200)
+          .style("opacity", 0.9);
+        this.tooltip
+          .html(d + "<br/>")
+          .style("left", 300 + "px")
+          .style("top", d3.event.mouseY - 28 + "px");
+      })
+      .on("mouseout", (d: number) => {
+        this.tooltip
+          .transition()
+          .duration(200)
+          .style("opacity", 0);
+      });
 
     console.log(d3);
   }
