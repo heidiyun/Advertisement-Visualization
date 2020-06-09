@@ -3,15 +3,7 @@ import * as d3 from "d3";
 
 @Component({})
 export default class ScatterPlot extends Vue {
-  private data: number[] = [
-    Math.random() * 100,
-    Math.random() * 100,
-    Math.random() * 100,
-    Math.random() * 100,
-    Math.random() * 100,
-    Math.random() * 100,
-    Math.random() * 100
-  ];
+  private data: Array<{ x: number; y: number }> = [];
 
   private margin: {
     top: number;
@@ -28,6 +20,10 @@ export default class ScatterPlot extends Vue {
   private tooltip: any;
 
   private mounted() {
+    for (let i = 0; i < 100; i++) {
+      this.data.push({ x: Math.random() * 100, y: Math.random() * 100 });
+    }
+
     // svg 생성
     this.svg = d3
       .select("#scatter-plot")
@@ -44,12 +40,17 @@ export default class ScatterPlot extends Vue {
       .select("#scatter-plot")
       .append("div")
       .attr("class", "tooltip")
-      .style("opacity", 0);
+      .style("position", "absolute")
+      .style("display", "none")
+      .style("background", "#eee")
+      .style("padding", "4px 12px")
+      .style("border-radius", "8px")
+      .style("opacity", 0.9);
 
     // x 축 그리기
     this.x = d3
       .scaleLinear()
-      .domain([0, Math.max(...this.data)])
+      .domain([0, Math.max(...this.data.map(d => d.x))])
       .range([0, this.width]);
     this.svg
       .append("g")
@@ -60,7 +61,7 @@ export default class ScatterPlot extends Vue {
     // y축 그리기
     this.y = d3
       .scaleLinear()
-      .domain([0, Math.max(...this.data)])
+      .domain([0, Math.max(...this.data.map(d => d.y))])
       .range([this.height, 0]);
     this.svg
       .append("g")
@@ -73,25 +74,19 @@ export default class ScatterPlot extends Vue {
       .data(this.data)
       .enter()
       .append("circle")
-      .attr("cx", (d: number) => this.x(d))
-      .attr("cy", (d: number) => this.y(d))
+      .attr("cx", (d: { x: number; y: number }) => this.x(d.x))
+      .attr("cy", (d: { x: number; y: number }) => this.y(d.y))
       .attr("r", 5)
-      .style("fill", "red")
-      .on("mouseover", (d: number) => {
+      .style("fill", d3.hsl(166, Math.random(), 0.3))
+      .on("mouseover", (d: { x: number; y: number }) => {
         this.tooltip
-          .transition()
-          .duration(200)
-          .style("opacity", 0.9);
-        this.tooltip
-          .html(d + "<br/>")
-          .style("left", 300 + "px")
-          .style("top", d3.event.mouseY - 28 + "px");
+          .html("x: " + d.x + "<br/>" + "y: " + d.y)
+          .style("top", this.y(d.y) - 36 + "px")
+          .style("left", this.x(d.x) + "px")
+          .style("display", "block");
       })
-      .on("mouseout", (d: number) => {
-        this.tooltip
-          .transition()
-          .duration(200)
-          .style("opacity", 0);
+      .on("mouseout", (d: { x: number; y: number }) => {
+        this.tooltip.style("display", "none");
       });
 
     console.log(d3);
