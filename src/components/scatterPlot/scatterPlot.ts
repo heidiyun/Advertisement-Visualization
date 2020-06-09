@@ -3,6 +3,12 @@ import * as d3 from "d3";
 
 @Component({})
 export default class ScatterPlot extends Vue {
+  // TODO
+  // 1. button 추가
+  // button 이 눌릴때 (metric 변경 -> data 변경)
+  // data가 변경될 때 this.svg 다시 렌더링
+  // 2. color hsl 로 적용
+
   private data: Array<{ x: number; y: number }> = [];
 
   private margin: {
