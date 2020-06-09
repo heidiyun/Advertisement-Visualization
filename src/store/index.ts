@@ -32,6 +32,7 @@ export default new Vuex.Store<State>({
   actions: {},
   getters: {
     adsets(state) {
+      return state.adsets;
       // date와 metric이 변경되면 adset을 넘겨줘야 한다.
       // getters는 각 컴포넌트 마다 하나씩 할당된다.
       //로직...

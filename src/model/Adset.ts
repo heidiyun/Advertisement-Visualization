@@ -7,7 +7,7 @@ export default class Adset {
   private billingEvent = "";
   private bidStrategy = "";
   private color = "";
-  private insight: Map<string, Insight> = new Map();
+  private insights: Map<string, Insight> = new Map();
 
   constructor(
     id: number,
@@ -81,7 +81,7 @@ export default class Adset {
         costPerOmniAppInstall: costPerActionType.omni_app_install,
         costPerUniqueClick: i.cost_per_unique_click
       };
-      this.insight?.set(i.date_start, insight);
+      this.insights?.set(i.date_start, insight);
     });
   }
 }

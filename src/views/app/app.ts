@@ -47,8 +47,9 @@ export default class App extends Vue {
       );
       adsets.push(adset);
     });
+    this.$store.commit("setAdsets", adsets);
 
-    console.log(adsets);
+    console.log(this.$store.getters.adsets);
   }
 
   public created() {
