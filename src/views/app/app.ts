@@ -4,7 +4,8 @@ import "ant-design-vue/dist/antd.css";
 import AdsetTable from "@/components/table";
 import LineGraph from "@/components/lineGraph";
 import ScatterPlot from "@/components/scatterPlot";
-
+import * as data from "../../../data/advertisements-d.json";
+import Adset from "@/model/Adset";
 import moment from "moment";
 
 Vue.use(Antd);
@@ -24,6 +25,30 @@ export default class App extends Vue {
 
   public handleMenuClick(e: any) {
     console.log("click", e);
+  }
+
+  private mounted() {
+    // Adset Init
+    console.log(data);
+    const adsets: Array<Adset> = [];
+
+    data.forEach(d => {
+      const adsetData = d.data.adset;
+      const insights = d.data.insights;
+
+      const adset = new Adset(
+        adsetData.id,
+        adsetData.name,
+        adsetData.daily_budget,
+        adsetData.billing_event,
+        adsetData.bid_strategy,
+        "#fefefe",
+        insights
+      );
+      adsets.push(adset);
+    });
+
+    console.log(adsets);
   }
 
   public created() {
