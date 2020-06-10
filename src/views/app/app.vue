@@ -14,7 +14,8 @@
             <a-menu-item key="3"> <a-icon type="user" />3rd item </a-menu-item>
           </a-menu>
           <a-button style="margin-left: 8px">
-            Button <a-icon type="down" />
+            Button
+            <a-icon type="down" />
           </a-button>
         </a-dropdown>
       </v-layout>

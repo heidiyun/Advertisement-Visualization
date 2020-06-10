@@ -1,13 +1,17 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Adset from "@/model/Adset";
+import Insight from "@/model/Insight";
+import { Watch } from "vue-property-decorator";
 
 Vue.use(Vuex);
 
 interface State {
   metric1: string | undefined;
   metric2: string | undefined;
+  date: string[] | undefined;
   adsets: Adset[] | undefined;
+
   // adsets: Adset[] | undefined
 }
 
@@ -15,6 +19,7 @@ export default new Vuex.Store<State>({
   state: {
     metric1: undefined,
     metric2: undefined,
+    date: ["2020-04-02", "2020-04-05"],
     adsets: undefined
     // adsets:
   },
@@ -25,18 +30,56 @@ export default new Vuex.Store<State>({
     setMetric2(state, payload) {
       state.metric2 = payload;
     },
+    setDate(state, payload) {
+      state.date = payload;
+    },
     setAdsets(state, payload) {
       state.adsets = payload;
     }
   },
   actions: {},
   getters: {
+    date(state) {
+      return state.date;
+    },
     adsets(state) {
-      return state.adsets;
-      // date와 metric이 변경되면 adset을 넘겨줘야 한다.
-      // getters는 각 컴포넌트 마다 하나씩 할당된다.
-      //로직...
-      // return state.Adset
+      if (!state.adsets) {
+        return;
+      }
+
+      if (!state.date) {
+        return state.adsets;
+      }
+
+      const startDate = state.date[0];
+      const endDate = state.date[1];
+
+      const duration =
+        Number(endDate.split("-").join("")) -
+        Number(startDate.split("-").join(""));
+
+      const resultAdsets: Adset[] = [];
+
+      for (let i = 0; i < state.adsets?.length; i++) {
+        const adset = state.adsets[i];
+        const insight: Map<string, Insight> = new Map();
+
+        for (let j = 0; j < duration + 1; j++) {
+          const key = startDate.split("-");
+
+          key[2] = Number(key[2]) + j + "";
+          key[2] = key[2].length === 1 ? "0" + key[2] : key[2];
+
+          insight.set(key.join("-"), adset.insights.get(key.join("-")));
+        }
+        const cloneAdset = JSON.parse(JSON.stringify(adset));
+        delete cloneAdset.insights;
+        cloneAdset.insights = insight;
+
+        resultAdsets.push(cloneAdset);
+      }
+
+      return resultAdsets;
     }
   },
   modules: {}

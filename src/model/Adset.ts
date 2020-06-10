@@ -1,13 +1,13 @@
 import Insight from "./Insight";
 
 export default class Adset {
-  private id = -1;
-  private name = "";
-  private dailyBudget = "";
-  private billingEvent = "";
-  private bidStrategy = "";
-  private color = "";
-  private insights: Map<string, Insight> = new Map();
+  public readonly id = -1;
+  public readonly name = "";
+  public readonly dailyBudget = "";
+  public readonly billingEvent = "";
+  public readonly bidStrategy = "";
+  public readonly color = "";
+  public readonly insights: Map<string, Insight> = new Map();
 
   constructor(
     id: number,

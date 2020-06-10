@@ -16,10 +16,28 @@ Vue.component("scatter-plot", ScatterPlot);
 @Component({})
 export default class App extends Vue {
   public momentRange: moment.Moment[] = [];
+  private colors: string[] = [
+    "#F44336",
+    "#E91E63",
+    "#9C27B0",
+    "#3F51B5",
+    "#2196F3",
+    "#00BCD4",
+    "#009688",
+    "#4CAF50",
+    "#CDDC39",
+    "#FFEB3B",
+    "#FF9800",
+    "#FF5722",
+    "#795548",
+    "#607D8B"
+  ];
 
   public onChange(date: moment.Moment[], dateString: string[]) {
     console.log(date);
     // this.momentRange = [moment(dateString, 'YYYY-MM-DD'), moment(dateString, 'YYYY-MM-DD')];
+
+    this.$store.commit("setDate", dateString);
     this.momentRange = date;
   }
 
@@ -29,20 +47,18 @@ export default class App extends Vue {
 
   private mounted() {
     // Adset Init
-    console.log(data);
     const adsets: Array<Adset> = [];
 
-    data.forEach(d => {
+    data.forEach((d, index) => {
       const adsetData = d.data.adset;
       const insights = d.data.insights;
-
       const adset = new Adset(
         adsetData.id,
         adsetData.name,
         adsetData.daily_budget,
         adsetData.billing_event,
         adsetData.bid_strategy,
-        "#fefefe",
+        this.colors[index],
         insights
       );
       adsets.push(adset);
@@ -54,8 +70,8 @@ export default class App extends Vue {
 
   public created() {
     this.momentRange = [
-      moment("2015-01-01", "YYYY-MM-DD"),
-      moment("2015-01-31", "YYYY-MM-DD")
+      moment("2020-04-01", "YYYY-MM-DD"),
+      moment("2020-04-30", "YYYY-MM-DD")
     ];
   }
 }
