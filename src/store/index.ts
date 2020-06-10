@@ -19,7 +19,7 @@ export default new Vuex.Store<State>({
   state: {
     metric1: undefined,
     metric2: undefined,
-    date: ["2020-04-02", "2020-04-05"],
+    date: undefined,
     adsets: undefined
     // adsets:
   },

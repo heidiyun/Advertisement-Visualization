@@ -1,4 +1,4 @@
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Watch } from "vue-property-decorator";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import AdsetTable from "@/components/table";
@@ -31,7 +31,14 @@ export default class App extends Vue {
     console.log("click", e);
   }
 
+  @Watch("$store.getters.date")
+  public test() {
+    console.log(this.$store.getters.adsets);
+  }
+
   private mounted() {
+    this.$store.commit("setDate", ["2020-04-01", "2020-04-30"]);
+
     // Adset Init
     const adsets: Array<Adset> = [];
 
