@@ -1,5 +1,5 @@
 import Insight from "./Insight";
-
+import util from "@/util/util.ts";
 export default class Adset {
   public readonly id = -1;
   public readonly name = "";
@@ -24,44 +24,13 @@ export default class Adset {
     this.billingEvent = billingEvent;
     this.bidStrategy = bidStrategy;
     this.color = color;
+
     insights.forEach(i => {
-      let actions = JSON.stringify(i.actions);
-      actions = actions.slice(1, actions.length - 1);
+      const actions = util.makeJson(JSON.stringify(i.actions));
 
-      actions =
-        "{" +
-        actions
-          .replace(/"action_type":/gi, "")
-          .replace(/}/gi, "")
-          .replace(/{/gi, "")
-          .replace(/,"value"/gi, "") +
-        "}";
-
-      actions = JSON.parse(actions);
-
-      let costPerActionType = JSON.stringify(i.cost_per_action_type);
-      costPerActionType =
-        "{" +
-        costPerActionType
-          .slice(1, costPerActionType.length - 1)
-          .replace(/"action_type":/gi, "")
-          .replace(/}/gi, "")
-          .replace(/{/gi, "")
-          .replace(/,"value"/gi, "") +
-        "}";
-
-      costPerActionType = JSON.parse(costPerActionType);
-
-      // obj = obj
-      //   .replace(/\"action_type\"\:/gi, '')
-      //   .replace(/}/gi, '')
-      //   .replace(/{/gi, '')
-      //   .replace(/\,\"value\"/gi, '');
-      // obj = '{' + obj + '}';
-      // console.log(JSON.parse(actions));
-
-      // const actions = { ...i.actions };
-      // const costPerActionType = { ...i.cost_per_action_type };
+      const costPerActionType = util.makeJson(
+        JSON.stringify(i.cost_per_action_type)
+      );
 
       const insight: Insight = {
         clicks: i.clicks,

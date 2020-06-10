@@ -7,6 +7,7 @@ import ScatterPlot from "@/components/scatterPlot";
 import * as data from "../../../data/advertisements-d.json";
 import Adset from "@/model/Adset";
 import moment from "moment";
+import util from "@/util/util.ts";
 
 Vue.use(Antd);
 Vue.component("adset-table", AdsetTable);
@@ -16,22 +17,7 @@ Vue.component("scatter-plot", ScatterPlot);
 @Component({})
 export default class App extends Vue {
   public momentRange: moment.Moment[] = [];
-  private colors: string[] = [
-    "#F44336",
-    "#E91E63",
-    "#9C27B0",
-    "#3F51B5",
-    "#2196F3",
-    "#00BCD4",
-    "#009688",
-    "#4CAF50",
-    "#CDDC39",
-    "#FFEB3B",
-    "#FF9800",
-    "#FF5722",
-    "#795548",
-    "#607D8B"
-  ];
+  private colors: string[] = util.colors;
 
   public onChange(date: moment.Moment[], dateString: string[]) {
     console.log(date);
