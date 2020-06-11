@@ -2,7 +2,6 @@ import Vue from "vue";
 import Vuex from "vuex";
 import Adset from "@/model/Adset";
 import Insight from "@/model/Insight";
-import { Watch } from "vue-property-decorator";
 
 Vue.use(Vuex);
 

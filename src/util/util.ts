@@ -15,6 +15,8 @@ const colors: string[] = [
   "#607D8B"
 ];
 
+const metrics: string[] = [];
+
 function makeJson(jsonString: string) {
   return JSON.parse(
     "{" +
@@ -30,5 +32,6 @@ function makeJson(jsonString: string) {
 
 export default {
   colors,
+  metrics,
   makeJson
 };

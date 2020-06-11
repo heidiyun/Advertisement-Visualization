@@ -1,5 +1,5 @@
 import Insight from "./Insight";
-import util from "@/util/util.ts";
+import utils from "@/util/util.ts";
 export default class Adset {
   public readonly id = -1;
   public readonly name = "";
@@ -26,9 +26,9 @@ export default class Adset {
     this.color = color;
 
     insights.forEach(i => {
-      const actions = util.makeJson(JSON.stringify(i.actions));
+      const actions = utils.makeJson(JSON.stringify(i.actions));
 
-      const costPerActionType = util.makeJson(
+      const costPerActionType = utils.makeJson(
         JSON.stringify(i.cost_per_action_type)
       );
 
@@ -50,7 +50,10 @@ export default class Adset {
         costPerOmniAppInstall: costPerActionType.omni_app_install,
         costPerUniqueClick: i.cost_per_unique_click
       };
+
       this.insights?.set(i.date_start, insight);
+
+      utils.metrics = Object.keys(insight);
     });
   }
 }
