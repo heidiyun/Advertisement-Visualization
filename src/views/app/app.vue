@@ -5,16 +5,19 @@
         <a-range-picker @change="onChange" :defaultValue="momentRange" />
         <a-dropdown style="margin: 0 8px;">
           <a-menu slot="overlay" @click="handleMenuClick">
-            <a-menu-item key="1">
+            <a-menu-item v-for="(name, i) in insights" :key="i">
+              {{ name }}
+            </a-menu-item>
+            <!-- <a-menu-item key="1">
               <a-icon type="user" />1st menu item
             </a-menu-item>
             <a-menu-item key="2">
               <a-icon type="user" />2nd menu item
             </a-menu-item>
-            <a-menu-item key="3"> <a-icon type="user" />3rd item </a-menu-item>
+            <a-menu-item key="3"> <a-icon type="user" />3rd item </a-menu-item> -->
           </a-menu>
           <a-button style="margin-left: 8px">
-            Button <a-icon type="down" />
+            {{ metric1 }} <a-icon type="down" />
           </a-button>
         </a-dropdown>
       </v-layout>

@@ -1,9 +1,18 @@
 <template>
-  <div>Table</div>
+  <div class="table-container">
+    <a-table
+      class="adset-table"
+      :columns="columns"
+      :data-source="data"
+      :scroll="{ x: 1300 }"
+    >
+      <!-- <a slotScope="text" href="javascript:;">action</a> -->
+    </a-table>
+  </div>
 </template>
 
 <script src="./table.ts"></script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "./table.scss";
 </style>
