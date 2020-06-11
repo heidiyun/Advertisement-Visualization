@@ -72,7 +72,6 @@ export default class App extends Vue {
   public handleMenuClick(e: { key: string }) {
     this.metric1 = e.key;
   }
-
   @Watch("$store.getters.date")
   public test() {
     console.log(this.$store.getters.adsets);
