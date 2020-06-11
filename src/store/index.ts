@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import Adset from "@/model/Adset";
 import Insight from "@/model/Insight";
+import utils from "@/util/util";
 
 Vue.use(Vuex);
 
@@ -38,9 +39,6 @@ export default new Vuex.Store<State>({
   },
   actions: {},
   getters: {
-    getAdsetByDate(state) {
-      return state.adsets.filter(state.date);
-    },
     metric1(state) {
       return state.metric1;
     },
@@ -50,44 +48,52 @@ export default new Vuex.Store<State>({
     date(state) {
       return state.date;
     },
+    adsetsForScatterPlot(state) {
+      //metric1, metric2
+      if (!state.date) {
+        return state.adsets;
+      }
+
+      if (!state.adsets) {
+        return [];
+      }
+
+      if (!state.metric1 || !state.metric2) {
+        return state.adsets;
+      }
+
+      return utils.filterAdset(state.date, state.adsets, false, [
+        state.metric1,
+        state.metric2
+      ]);
+    },
+    adsetsForLineGraph(state) {
+      //metric1
+      if (!state.date) {
+        return state.adsets;
+      }
+
+      if (!state.adsets) {
+        return [];
+      }
+
+      if (!state.metric1) {
+        return state.adsets;
+      }
+      return utils.filterAdset(state.date, state.adsets, false, [
+        state.metric1
+      ]);
+    },
     adsets(state) {
       if (!state.adsets) {
-        return;
+        return [];
       }
 
       if (!state.date) {
         return state.adsets;
       }
 
-      const startDate = state.date[0];
-      const endDate = state.date[1];
-
-      const duration =
-        Number(endDate.split("-").join("")) -
-        Number(startDate.split("-").join(""));
-
-      const resultAdsets: Adset[] = [];
-
-      for (let i = 0; i < state.adsets?.length; i++) {
-        const adset = state.adsets[i];
-        const insight: Map<string, Insight> = new Map();
-
-        for (let j = 0; j < duration + 1; j++) {
-          const key = startDate.split("-");
-
-          key[2] = Number(key[2]) + j + "";
-          key[2] = key[2].length === 1 ? "0" + key[2] : key[2];
-
-          insight.set(key.join("-"), adset.insights.get(key.join("-")));
-        }
-        const cloneAdset = JSON.parse(JSON.stringify(adset));
-        delete cloneAdset.insights;
-        cloneAdset.insights = insight;
-
-        resultAdsets.push(cloneAdset);
-      }
-
-      return resultAdsets;
+      return utils.filterAdset(state.date, state.adsets, true);
     }
   },
   modules: {}

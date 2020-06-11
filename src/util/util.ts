@@ -1,3 +1,5 @@
+import Adset from "@/model/Adset";
+
 const colors: string[] = [
   "#F44336",
   "#E91E63",
@@ -30,8 +32,59 @@ function makeJson(jsonString: string) {
   );
 }
 
+function filterAdset(
+  date: string[],
+  adsets: Adset[],
+  isAll: boolean,
+  insightKeys?: string[]
+) {
+  const startDate = date[0];
+  const endDate = date[1];
+
+  const duration =
+    Number(endDate.split("-").join("")) - Number(startDate.split("-").join(""));
+
+  const resultAdsets: Adset[] = [];
+
+  for (let i = 0; i < adsets.length; i++) {
+    const adset = adsets[i];
+    const insight = new Map();
+
+    for (let j = 0; j < duration + 1; j++) {
+      const key = startDate.split("-");
+
+      key[2] = Number(key[2]) + j + "";
+      key[2] = key[2].length === 1 ? "0" + key[2] : key[2];
+
+      const metric1 = insightKeys?.[0];
+
+      isAll
+        ? insight.set(key.join("-"), adset.insights.get(key.join("-")))
+        : insight.set(
+            key.join("-"),
+            adset.insights.get(key.join("-"))[`${metric1}`]
+          );
+
+      if (insightKeys?.length === 2) {
+        const metric2 = insightKeys?.[1];
+        insight.set(key.join("-"), [
+          adset.insights.get(key.join("-"))[`${metric1}`],
+          adset.insights.get(key.join("-"))[`${metric2}`]
+        ]);
+      }
+    }
+    const cloneAdset = JSON.parse(JSON.stringify(adset));
+    delete cloneAdset.insights;
+    cloneAdset.insights = insight;
+
+    resultAdsets.push(cloneAdset);
+  }
+
+  return resultAdsets;
+}
 export default {
   colors,
   metrics,
-  makeJson
+  makeJson,
+  filterAdset
 };

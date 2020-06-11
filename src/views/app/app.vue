@@ -14,15 +14,15 @@
             :value="metric"
             >{{ metric }}</a-select-option
           >
-        </a-select> -->
+        </a-select>-->
         <a-dropdown style="margin: 0 8px;">
           <a-menu slot="overlay" @click="handleMenuClick">
-            <a-menu-item v-for="metric in metrics" :key="metric">{{
-              metric
-            }}</a-menu-item>
+            <a-menu-item v-for="metric in metrics" :key="metric">
+              {{ metric }}
+            </a-menu-item>
           </a-menu>
           <a-button style="margin-left: 8px">
-            {{ metric1 }}
+            {{ $store.getters.metric1 }}
             <a-icon type="down" />
           </a-button>
         </a-dropdown>

@@ -55,14 +55,10 @@ export default class App extends Vue {
     "cost_per_omni_app_install",
     "cost_per_unique_click"
   ];
-  public metric1 = "clicks";
-
   private colors: string[] = utils.colors;
   private metrics: string[] = [];
 
   public onChange(date: moment.Moment[], dateString: string[]) {
-    console.log(date);
-
     // this.momentRange = [moment(dateString, 'YYYY-MM-DD'), moment(dateString, 'YYYY-MM-DD')];
 
     this.$store.commit("setDate", dateString);
@@ -70,18 +66,13 @@ export default class App extends Vue {
   }
 
   public handleMenuClick(e: { key: string }) {
-    this.metric1 = e.key;
+    this.$store.commit("setMetric1", e.key);
   }
 
+  @Watch("$store.getters.metric1")
   @Watch("$store.getters.date")
   public test() {
-    console.log(this.$store.getters.adsets);
-  }
-
-  private adsetss = this.$store.getters.adsets;
-  public get a() {
-    console.log("getter");
-    return this.$store.getters.adsets;
+    console.log("test adsets", this.$store.getters.adsetsForScatterPlot);
   }
 
   private mounted() {
@@ -107,8 +98,13 @@ export default class App extends Vue {
 
     this.$store.commit("setAdsets", adsets);
 
-    console.log(this.$store.getters.adsets);
     this.metrics = utils.metrics;
+
+    this.$store.commit("setMetric1", "clicks");
+    this.$store.commit("setMetric2", "cpc");
+
+    console.log("metric1-adsets", this.$store.getters.adsetsForScatterPlot);
+    console.log("metrc2-adsets", this.$store.getters.adsetsForLineGraph);
   }
 
   public created() {
