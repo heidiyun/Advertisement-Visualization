@@ -1,7 +1,7 @@
 import { Vue, Component, Watch } from "vue-property-decorator";
 import * as d3 from "d3";
 
-interface TAdset {
+interface AdsetType {
   x: number;
   y: number;
   colorHSL: { h: number; s: number; l: number };
@@ -14,7 +14,7 @@ export default class ScatterPlot extends Vue {
   // data가 변경될 때 this.svg 다시 렌더링
   // 2. color hsl 로 적용
 
-  private data: Array<tAdset> = [];
+  private data: Array<AdsetType> = [];
   private selectedMetric: { 1?: string; 2?: string } = {
     1: "metric1",
     2: "metric2"
@@ -115,13 +115,13 @@ export default class ScatterPlot extends Vue {
       .data(this.data)
       .enter()
       .append("circle")
-      .attr("cx", (d: tAdset) => this.xAxis(d.x))
-      .attr("cy", (d: tAdset) => this.yAxis(d.y))
+      .attr("cx", (d: AdsetType) => this.xAxis(d.x))
+      .attr("cy", (d: AdsetType) => this.yAxis(d.y))
       .attr("r", 5)
-      .style("fill", (d: tAdset) =>
+      .style("fill", (d: AdsetType) =>
         d3.hsl(d.colorHSL.h, d.colorHSL.s, d.colorHSL.l)
       )
-      .on("mouseover", (d: tAdset) => {
+      .on("mouseover", (d: AdsetType) => {
         this.tooltip
           .html("x: " + d.x + "<br/>" + "y: " + d.y)
           .style("top", this.yAxis(d.y) - 36 + "px")
@@ -129,7 +129,7 @@ export default class ScatterPlot extends Vue {
           .style("display", "block")
           .style("z-index", 3);
       })
-      .on("mouseout", (d: tAdset) => {
+      .on("mouseout", (d: AdsetType) => {
         this.tooltip.style("display", "none");
       });
   }
