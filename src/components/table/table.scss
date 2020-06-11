@@ -1,12 +1,7 @@
 .table-container {
   width: 100%;
-  height: 100%;
+  height: 100% !important;
+  overflow: auto;
   border-radius: 8px;
 
-  .adset-table {
-    min-height: 100% !important;
-  }
-  .ant-table-pagination {
-    display: none !important;
-  }
 }

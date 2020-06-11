@@ -1,5 +1,7 @@
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Watch } from "vue-property-decorator";
 // import testData from '@/data/advertisements-d.json';
+// import store from '@/store';
+
 type dataType =
   | "clicks"
   | "impressions"
@@ -8,16 +10,16 @@ type dataType =
   | "spend"
   | "reach"
   | "purchase"
-  | "omni_purchase"
-  | "omni_purchase"
-  | "mobile_app_install"
-  | "omni_app_install"
-  | "unique_clicks"
-  | "cost_per_purchase"
-  | "cost_per_omni_purchase"
-  | "cost_per_mobile_app_install"
-  | "cost_per_omni_app_install"
-  | "cost_per_unique_click";
+  | "omniPurchase"
+  | "omniPurchase"
+  | "mobileAppInstall"
+  | "omniAppInstall"
+  | "uniqueClicks"
+  | "costPerPurchase"
+  | "costPerOmniPurchase"
+  | "costPerMobileAppInstall"
+  | "costPerOmniAppInstall"
+  | "costPerUniqueClick";
 interface DataSet {
   clicks: number;
   impressions: number;
@@ -26,15 +28,15 @@ interface DataSet {
   spend: number;
   reach: number;
   purchase: number;
-  omni_purchase: number;
-  mobile_app_install: number;
-  omni_app_install: number;
-  unique_clicks: number;
-  cost_per_purchase: number;
-  cost_per_omni_purchase: number;
-  cost_per_mobile_app_install: number;
-  cost_per_omni_app_install: number;
-  cost_per_unique_click: number;
+  omniPurchase: number;
+  mobileAppInstall: number;
+  omniAppInstall: number;
+  uniqueClicks: number;
+  costPerPurchase: number;
+  costPerOmniPurchase: number;
+  costPerMobileAppInstall: number;
+  costPerOmniAppInstall: number;
+  costPerUniqueClick: number;
 }
 
 const dataSet: dataType[] = [
@@ -45,14 +47,14 @@ const dataSet: dataType[] = [
   "spend",
   "reach",
   "purchase",
-  "omni_purchase",
-  "mobile_app_install",
-  "unique_clicks",
-  "cost_per_purchase",
-  "cost_per_omni_purchase",
-  "cost_per_mobile_app_install",
-  "cost_per_omni_app_install",
-  "cost_per_unique_click"
+  "omniPurchase",
+  "mobileAppInstall",
+  "uniqueClicks",
+  "costPerPurchase",
+  "costPerOmniPurchase",
+  "costPerMobileAppInstall",
+  "costPerOmniAppInstall",
+  "costPerUniqueClick"
 ];
 @Component({})
 export default class Table extends Vue {
@@ -66,20 +68,17 @@ export default class Table extends Vue {
     sorter?: (a: any, b: any) => number;
   }> = [];
 
-  public data = [
-    {
-      key: "1",
-      name: "John ",
-      age: 32,
-      address: "New York Park"
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 40,
-      address: "London Park"
-    }
-  ];
+  public data = [];
+
+  @Watch("$store.getters.adsets")
+  onChangeData(val1: any, val2: any) {
+    this.data = this.$store.getters.adsets;
+    this.filterData();
+  }
+
+  public filterData() {
+    // console.log('asdf', this.data);
+  }
 
   public created() {
     this.columns = [

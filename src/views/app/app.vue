@@ -3,21 +3,27 @@
     <div class="visualization-wrapper">
       <v-layout class="button-contents">
         <a-range-picker @change="onChange" :defaultValue="momentRange" />
+        <!-- <a-select
+          default-value="metric1"
+          style="width: 120px; margin: 0 8px;"
+          @change="handleMenuClick"
+        >
+          <a-select-option
+            v-for="metric in metrics"
+            :key="metric"
+            :value="metric"
+            >{{ metric }}</a-select-option
+          >
+        </a-select> -->
         <a-dropdown style="margin: 0 8px;">
           <a-menu slot="overlay" @click="handleMenuClick">
-            <a-menu-item v-for="(name, i) in insights" :key="i">
-              {{ name }}
-            </a-menu-item>
-            <!-- <a-menu-item key="1">
-              <a-icon type="user" />1st menu item
-            </a-menu-item>
-            <a-menu-item key="2">
-              <a-icon type="user" />2nd menu item
-            </a-menu-item>
-            <a-menu-item key="3"> <a-icon type="user" />3rd item </a-menu-item> -->
+            <a-menu-item v-for="metric in metrics" :key="metric">{{
+              metric
+            }}</a-menu-item>
           </a-menu>
           <a-button style="margin-left: 8px">
-            {{ metric1 }} <a-icon type="down" />
+            {{ metric1 }}
+            <a-icon type="down" />
           </a-button>
         </a-dropdown>
       </v-layout>
@@ -26,9 +32,16 @@
           class="visualizations adset-list"
           style="height: 360px; width: 244px;"
         >
-          <div v-for="i in 13" :key="i" class="adset-item d-flex">
-            <div class="adset-color"></div>
-            <div class="adset-name">adset {{ i }}</div>
+          <div
+            class="adset-item d-flex"
+            v-for="adset in $store.getters.adsets"
+            :key="adset.id"
+          >
+            <div
+              class="adset-color"
+              :style="{ backgroundColor: `${adset.color}` }"
+            ></div>
+            <div class="adset-name">{{ adset.name }}</div>
           </div>
         </div>
         <v-spacer></v-spacer>

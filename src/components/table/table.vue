@@ -5,6 +5,8 @@
       :columns="columns"
       :data-source="data"
       :scroll="{ x: 1300 }"
+      rowKey="name"
+      :pagination="false"
     >
       <!-- <a slotScope="text" href="javascript:;">action</a> -->
     </a-table>
