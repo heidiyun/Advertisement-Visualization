@@ -29,8 +29,9 @@ export default class App extends Vue {
     this.momentRange = date;
   }
 
-  public handleMenuClick(e: any) {
-    console.log("click", e);
+  public handleMenuClick(selectedMetric: any) {
+    this.$store.commit("setMetric1", selectedMetric);
+    console.log(this.$store.getters.metric1);
   }
 
   @Watch("$store.getters.date")

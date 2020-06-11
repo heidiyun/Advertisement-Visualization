@@ -38,6 +38,12 @@ export default new Vuex.Store<State>({
   },
   actions: {},
   getters: {
+    metric1(state) {
+      return state.metric1;
+    },
+    metric2(state) {
+      return state.metric2;
+    },
     date(state) {
       return state.date;
     },
