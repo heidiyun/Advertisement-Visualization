@@ -38,6 +38,9 @@ export default new Vuex.Store<State>({
   },
   actions: {},
   getters: {
+    getAdsetByDate(state) {
+      return state.adsets.filter(state.date);
+    },
     metric1(state) {
       return state.metric1;
     },
