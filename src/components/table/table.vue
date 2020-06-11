@@ -4,7 +4,7 @@
       class="adset-table"
       :columns="columns"
       :data-source="data"
-      :scroll="{ x: 1300 }"
+      :scroll="{ x: 1500, y: 300 }"
       rowKey="name"
       :pagination="false"
     >

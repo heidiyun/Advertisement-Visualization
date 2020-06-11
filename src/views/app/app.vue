@@ -52,7 +52,7 @@
       <v-layout class="visualizations mr-b-16" style="height: 300px">
         <line-graph></line-graph>
       </v-layout>
-      <v-layout class="visualizations mr-b-16" style="height: 320px">
+      <v-layout class="visualizations mr-b-16" style="height: 380px">
         <adset-table></adset-table>
       </v-layout>
     </div>
