@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/d3": "^5.7.2",
+    "@types/lodash": "^4.14.155",
     "core-js": "^3.6.4",
     "d3": "^5.16.0",
     "moment": "^2.26.0",

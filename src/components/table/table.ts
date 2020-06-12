@@ -77,7 +77,7 @@ export default class Table extends Vue {
   }
 
   public filterData() {
-    // console.log('asdf', this.data);
+    // console.log('asdf', this.data[0].insights);
   }
 
   public created() {
