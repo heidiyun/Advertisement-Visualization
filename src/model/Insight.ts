@@ -9,7 +9,7 @@ export default interface Insight {
   omniPurchase: number;
   mobileAppInstall: number;
   omniAppInstall: number;
-  uniqueClikcs: number;
+  uniqueClicks: number;
   costPerPurchase: number;
   costPerOmniPurchase: number;
   costPerMobileAppInstall: number;
