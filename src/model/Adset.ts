@@ -6,7 +6,7 @@ export default class Adset {
   public readonly dailyBudget = "";
   public readonly billingEvent = "";
   public readonly bidStrategy = "";
-  public readonly color = "";
+  public color = "";
   public readonly insights: Map<string, Insight> = new Map();
 
   constructor(

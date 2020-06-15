@@ -11,6 +11,7 @@ interface State {
   metric2: string | undefined;
   date: string[] | undefined;
   adsets: Adset[] | undefined;
+  selectedAdsets: number[] | undefined;
 
   // adsets: Adset[] | undefined
 }
@@ -20,7 +21,8 @@ export default new Vuex.Store<State>({
     metric1: undefined,
     metric2: undefined,
     date: undefined,
-    adsets: undefined
+    adsets: undefined,
+    selectedAdsets: undefined
     // adsets:
   },
   mutations: {
@@ -35,6 +37,9 @@ export default new Vuex.Store<State>({
     },
     setAdsets(state, payload) {
       state.adsets = payload;
+    },
+    setSelectedAdsets(state, payload) {
+      state.selectedAdsets = payload;
     }
   },
   actions: {},
@@ -62,10 +67,12 @@ export default new Vuex.Store<State>({
         return state.adsets;
       }
 
-      return utils.filterAdset(state.date, state.adsets, false, [
-        state.metric1,
-        state.metric2
-      ]);
+      return utils
+        .filterAdset(state.date, state.adsets, false, [
+          state.metric1,
+          state.metric2
+        ])
+        .filter(adset => state.selectedAdsets?.indexOf(adset.id) !== -1);
     },
     adsetsForLineGraph(state) {
       //metric1
@@ -80,9 +87,9 @@ export default new Vuex.Store<State>({
       if (!state.metric1) {
         return state.adsets;
       }
-      return utils.filterAdset(state.date, state.adsets, false, [
-        state.metric1
-      ]);
+      return utils
+        .filterAdset(state.date, state.adsets, false, [state.metric1])
+        .filter(adset => state.selectedAdsets?.indexOf(adset.id) !== -1);
     },
     adsets(state) {
       if (!state.adsets) {
@@ -94,6 +101,12 @@ export default new Vuex.Store<State>({
       }
 
       return utils.filterAdset(state.date, state.adsets, true);
+    },
+    allAdset(state) {
+      return state.adsets;
+    },
+    selectedAdsets(state) {
+      return state.selectedAdsets;
     }
   },
   modules: {}

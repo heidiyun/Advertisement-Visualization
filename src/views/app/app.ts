@@ -15,48 +15,12 @@ Vue.component("adset-table", AdsetTable);
 Vue.component("line-graph", LineGraph);
 Vue.component("scatter-plot", ScatterPlot);
 
-interface DataSet {
-  clicks: number;
-  impressions: number;
-  cpc: number;
-  cpm: number;
-  spend: number;
-  reach: number;
-  purchase: number;
-  omni_purchase: number;
-  mobile_app_install: number;
-  omni_app_install: number;
-  unique_clicks: number;
-  cost_per_purchase: number;
-  cost_per_omni_purchase: number;
-  cost_per_mobile_app_install: number;
-  cost_per_omni_app_install: number;
-  cost_per_unique_click: number;
-}
-
 @Component({})
 export default class App extends Vue {
   public momentRange: moment.Moment[] = [];
-
-  public insights = [
-    "clicks",
-    "impressions",
-    "cpc",
-    "cpm",
-    "spend",
-    "reach",
-    "purchase",
-    "omni_purchase",
-    "mobile_app_install",
-    "unique_clicks",
-    "cost_per_purchase",
-    "cost_per_omni_purchase",
-    "cost_per_mobile_app_install",
-    "cost_per_omni_app_install",
-    "cost_per_unique_click"
-  ];
   private colors: string[] = utils.colors;
   private metrics: string[] = [];
+  private selectedAdsets: number[] = [];
 
   public onChange(date: moment.Moment[], dateString: string[]) {
     // this.momentRange = [moment(dateString, 'YYYY-MM-DD'), moment(dateString, 'YYYY-MM-DD')];
@@ -69,10 +33,21 @@ export default class App extends Vue {
     this.$store.commit("setMetric1", e.key);
   }
 
-  @Watch("$store.getters.metric1")
-  @Watch("$store.getters.date")
+  @Watch("$store.getters.adsetsForScatterPlot")
   public test() {
     console.log("test adsets", this.$store.getters.adsetsForScatterPlot);
+  }
+
+  private selectAdset(adset: Adset) {
+    const index = this.selectedAdsets.indexOf(adset.id);
+    if (index !== -1) {
+      this.selectedAdsets.splice(index, 1);
+    } else {
+      this.selectedAdsets.push(adset.id);
+
+      // this.$store.getters.allAdset[adset.id].color = '#9c27b0';
+    }
+    this.$store.commit("setSelectedAdsets", this.selectedAdsets);
   }
 
   private mounted() {
@@ -103,8 +78,11 @@ export default class App extends Vue {
     this.$store.commit("setMetric1", "clicks");
     this.$store.commit("setMetric2", "cpc");
 
-    console.log("metric1-adsets", this.$store.getters.adsetsForScatterPlot);
-    console.log("metrc2-adsets", this.$store.getters.adsetsForLineGraph);
+    for (let i = 0; i < this.$store.getters.allAdset.length; i++) {
+      this.selectedAdsets.push(this.$store.getters.allAdset[i].id);
+    }
+    this.$store.commit("setSelectedAdsets", this.selectedAdsets);
+    console.log(this.selectedAdsets);
   }
 
   public created() {

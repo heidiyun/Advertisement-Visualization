@@ -28,33 +28,46 @@
         </a-dropdown>
       </v-layout>
       <v-layout class="mr-b-16">
-        <div
-          class="visualizations adset-list"
-          style="height: 360px; width: 244px;"
-        >
-          <div
-            class="adset-item d-flex"
-            v-for="adset in $store.getters.adsets"
-            :key="adset.id"
-          >
+        <div class="visualizations" style="width: 244px; height: 360px;">
+          <div class="title">Adset List</div>
+          <div class="adset-list component-area">
             <div
-              class="adset-color"
-              :style="{ backgroundColor: `${adset.color}` }"
-            ></div>
-            <div class="adset-name">{{ adset.name }}</div>
+              class="adset-item d-flex"
+              v-for="adset in $store.getters.adsets"
+              :key="adset.id"
+              @click="selectAdset(adset)"
+            >
+              <div
+                class="adset-color"
+                v-if="selectedAdsets.indexOf(adset.id) !== -1"
+                :style="{ backgroundColor: `${adset.color}` }"
+              ></div>
+
+              <div class="adset-color" v-else></div>
+              <div class="adset-name">{{ adset.name }}</div>
+            </div>
           </div>
         </div>
         <v-spacer></v-spacer>
-        <div class="visualizations" style="height: 360px; width: 820px;">
-          <scatter-plot></scatter-plot>
+        <div class="visualizations scatter-plot">
+          <div class="title">Scatter Plot</div>
+          <div class="component-area">
+            <scatter-plot></scatter-plot>
+          </div>
         </div>
       </v-layout>
-      <v-layout class="visualizations mr-b-16" style="height: 300px">
-        <line-graph></line-graph>
-      </v-layout>
-      <v-layout class="visualizations mr-b-16" style="height: 380px">
-        <adset-table></adset-table>
-      </v-layout>
+      <div class="visualizations mr-b-16" style="height: 300px">
+        <div class="title">Line Graph</div>
+        <div class="component-area">
+          <line-graph></line-graph>
+        </div>
+      </div>
+      <div class="visualizations mr-b-16" style="height:380px">
+        <div class="title">Table</div>
+        <div class="component-area">
+          <adset-table></adset-table>
+        </div>
+      </div>
     </div>
   </div>
 </template>
