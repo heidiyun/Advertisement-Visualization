@@ -1,6 +1,5 @@
 import { Vue, Component, Watch } from "vue-property-decorator";
-// import testData from '@/data/advertisements-d.json';
-// import store from '@/store';
+import Insight from "@/model/Insight";
 
 type dataType =
   | "clicks"
@@ -20,24 +19,6 @@ type dataType =
   | "costPerMobileAppInstall"
   | "costPerOmniAppInstall"
   | "costPerUniqueClick";
-interface DataSet {
-  clicks: number;
-  impressions: number;
-  cpc: number;
-  cpm: number;
-  spend: number;
-  reach: number;
-  purchase: number;
-  omniPurchase: number;
-  mobileAppInstall: number;
-  omniAppInstall: number;
-  uniqueClicks: number;
-  costPerPurchase: number;
-  costPerOmniPurchase: number;
-  costPerMobileAppInstall: number;
-  costPerOmniAppInstall: number;
-  costPerUniqueClick: number;
-}
 
 const dataSet: dataType[] = [
   "clicks",
@@ -56,6 +37,28 @@ const dataSet: dataType[] = [
   "costPerOmniAppInstall",
   "costPerUniqueClick"
 ];
+
+interface TableData {
+  name: string;
+  clicks: string;
+  impressions: string;
+  cpc: string;
+  cpm: string;
+  spend: string;
+  reach: string;
+  purchase: string;
+  omniPurchase: string;
+  mobileAppInstall: string;
+  omniAppInstall: string;
+  uniqueClicks: string;
+  costPerPurchase: string;
+  costPerOmniPurchase: string;
+  costPerMobileAppInstall: string;
+  costPerOmniAppInstall: string;
+  costPerUniqueClick: string;
+  insight: Insight;
+}
+
 @Component({})
 export default class Table extends Vue {
   public columns: Array<{
@@ -69,6 +72,7 @@ export default class Table extends Vue {
   }> = [];
 
   public data = [];
+  public filteredData: TableData[] = [];
 
   @Watch("$store.getters.adsets")
   onChangeData(val1: any, val2: any) {
@@ -77,7 +81,40 @@ export default class Table extends Vue {
   }
 
   public filterData() {
-    // console.log('asdf', this.data[0].insights);
+    const result: TableData[] = [];
+    this.data.forEach(
+      (data: { name: string; insights: Map<string, Insight> }) => {
+        const filteredInsight: TableData = {};
+
+        const insight: Insight = {};
+        let first = true;
+        data.insights.forEach(value => {
+          if (first) {
+            Object.keys(value).forEach((key: dataType) => {
+              insight[key] = value[key];
+            });
+            first = false;
+          } else {
+            Object.keys(value).forEach((key: dataType) => {
+              insight[key] += value[key];
+            });
+          }
+        });
+        Object.keys(insight).forEach(key => {
+          filteredInsight[key] = this.numToString(insight[key]);
+        });
+        filteredInsight.name = data.name;
+        filteredInsight.insight = insight;
+        result.push(filteredInsight);
+      }
+    );
+    this.filteredData = result;
+  }
+
+  public numToString(num: number) {
+    const str = num.toString();
+    const strCut = str.indexOf(".") === -1 ? str : num.toFixed(2).toString();
+    return strCut.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   public created() {
@@ -89,8 +126,10 @@ export default class Table extends Vue {
         title: name,
         dataIndex: name,
         key: `${i}`,
-        width: 120,
-        sorter: (a: DataSet, b: DataSet) => a[name] - b[name]
+        width:
+          name.length < 12 ? 140 : name.indexOf("costPer") !== -1 ? 220 : 190,
+        sorter: (a: TableData, b: TableData) =>
+          a.insight[name] - b.insight[name]
       };
       this.columns.push(data);
     });

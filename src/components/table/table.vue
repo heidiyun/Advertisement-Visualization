@@ -3,13 +3,11 @@
     <a-table
       class="adset-table"
       :columns="columns"
-      :data-source="data"
-      :scroll="{ x: 1500, y: 300 }"
-      rowKey="name"
+      :data-source="filteredData"
+      :scroll="{ x: 1500, y: 346 }"
+      row-key="name"
       :pagination="false"
-    >
-      <!-- <a slotScope="text" href="javascript:;">action</a> -->
-    </a-table>
+    />
   </div>
 </template>
 
