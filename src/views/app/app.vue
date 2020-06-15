@@ -16,9 +16,9 @@
       </a-select>-->
       <a-dropdown style="margin: 0 8px;">
         <a-menu slot="overlay" @click="handleMenuClick">
-          <a-menu-item v-for="metric in metrics" :key="metric">{{
-            metric
-          }}</a-menu-item>
+          <a-menu-item v-for="metric in metrics" :key="metric">
+            {{ metric }}
+          </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px">
           {{ $store.getters.metric1 }}
@@ -29,7 +29,7 @@
     <div class="visualization-wrapper">
       <v-layout class="mr-b-16">
         <div class="visualizations" style="width: 244px; height: 360px;">
-          <div class="title">Adset List</div>
+          <div class="title">애드셋 목록</div>
           <div class="adset-list component-area">
             <div
               class="adset-item d-flex"
@@ -50,20 +50,20 @@
         </div>
         <v-spacer></v-spacer>
         <div class="visualizations scatter-plot">
-          <div class="title">Scatter Plot</div>
+          <div class="title">상관관계 분석</div>
           <div class="component-area">
             <scatter-plot></scatter-plot>
           </div>
         </div>
       </v-layout>
       <div class="visualizations mr-b-16" style="height: 300px">
-        <div class="title">Line Graph</div>
+        <div class="title">시간별 추이</div>
         <div class="component-area">
           <line-graph></line-graph>
         </div>
       </div>
       <div class="visualizations mr-b-16" style="height:380px">
-        <div class="title">Table</div>
+        <div class="title">애드셋 정보</div>
         <div class="component-area">
           <adset-table></adset-table>
         </div>
