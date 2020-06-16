@@ -25,7 +25,27 @@ export default class App extends Vue {
   public onChange(date: moment.Moment[], dateString: string[]) {
     // this.momentRange = [moment(dateString, 'YYYY-MM-DD'), moment(dateString, 'YYYY-MM-DD')];
 
+    const startDate = dateString[0].split("-").join("");
+    const endDate = dateString[1].split("-").join("");
+
+    if (endDate >= "20200401" && endDate <= "20200430") {
+      if (startDate < "20200401" || startDate > "20200430") {
+        dateString = ["2020-04-01", dateString[1]];
+      }
+    } else {
+      if (startDate >= "20200401" && startDate <= "20200430") {
+        dateString = [dateString[0], "2020-04-30"];
+      } else {
+        dateString = [];
+      }
+    }
+
+    if (endDate > "20200430" && startDate < "20200401") {
+      dateString = ["2020-04-01", "2020-04-30"];
+    }
+
     this.$store.commit("setDate", dateString);
+    console.log("date", this.$store.getters.date);
     this.momentRange = date;
   }
 

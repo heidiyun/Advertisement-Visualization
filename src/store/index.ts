@@ -55,8 +55,8 @@ export default new Vuex.Store<State>({
     },
     adsetsForScatterPlot(state) {
       //metric1, metric2
-      if (!state.date) {
-        return state.adsets;
+      if (!state.date || state.date.length === 0) {
+        return [];
       }
 
       if (!state.adsets) {
@@ -76,8 +76,8 @@ export default new Vuex.Store<State>({
     },
     adsetsForLineGraph(state) {
       //metric1
-      if (!state.date) {
-        return state.adsets;
+      if (!state.date || state.date.length === 0) {
+        return [];
       }
 
       if (!state.adsets) {
@@ -87,6 +87,8 @@ export default new Vuex.Store<State>({
       if (!state.metric1) {
         return state.adsets;
       }
+
+      console.log("line");
       return utils
         .filterAdset(state.date, state.adsets, false, [state.metric1])
         .filter(adset => state.selectedAdsets?.indexOf(adset.id) !== -1);
@@ -96,8 +98,8 @@ export default new Vuex.Store<State>({
         return [];
       }
 
-      if (!state.date) {
-        return state.adsets;
+      if (!state.date || state.date.length === 0) {
+        return [];
       }
 
       return utils.filterAdset(state.date, state.adsets, true);
