@@ -33,7 +33,7 @@ export default class LineGraph extends Vue {
     space: 0,
     paddingX: 40,
     textX: 40,
-    paddingY: 40,
+    paddingY: 30,
     textY: 20,
     max: 1200
   };
@@ -50,6 +50,7 @@ export default class LineGraph extends Vue {
     this.svg.selectAll("*").remove();
     this.svg = d3.select("#line-graph");
     this.data = this.$store.getters.adsetsForLineGraph;
+    if (this.data.length === 0) return;
     let max = Math.max(
       ...this.data.map(data => Array.from(data.insights.values())).flat()
     );
@@ -60,9 +61,19 @@ export default class LineGraph extends Vue {
     this.setting.space =
       (this.width - (this.setting.paddingX * 2 + this.setting.textX)) /
       (size - 1);
+    // this.updateMetric(this.$store.getters.metric1);
     this.updateGraph(this.width, this.height);
     this.updateYAxis(this.max);
     this.updateXAxis(size);
+  }
+
+  public updateMetric(metric: string) {
+    this.svg
+      .append("text")
+      .text(`${metric}`)
+      .attr("y", this.setting.paddingY - 20)
+      .style("fill", "#ccc")
+      .attr("x", this.setting.paddingX - 4);
   }
 
   public updateGraph(width: number, height: number) {
