@@ -21,6 +21,8 @@ export default class App extends Vue {
   private colors: string[] = utils.colors;
   private metrics: string[] = [];
   private selectedAdsets: number[] = [];
+  private usedColors: number[] = [];
+  private colorIndex = 2;
 
   public onChange(date: moment.Moment[], dateString: string[]) {
     // this.momentRange = [moment(dateString, 'YYYY-MM-DD'), moment(dateString, 'YYYY-MM-DD')];
@@ -53,21 +55,49 @@ export default class App extends Vue {
     this.$store.commit("setMetric1", e.key);
   }
 
-  @Watch("$store.getters.adsetsForScatterPlot")
-  public test() {
-    console.log("test adsets", this.$store.getters.adsetsForScatterPlot);
-  }
-
   private selectAdset(adset: Adset) {
     const index = this.selectedAdsets.indexOf(adset.id);
     if (index !== -1) {
+      this.colorIndex = utils.colors.indexOf(
+        this.$store.getters.allAdset[adset.id].color
+      );
+      const nowColorIndex = this.usedColors.indexOf(this.colorIndex);
+      this.usedColors.splice(nowColorIndex, 1);
+
       this.selectedAdsets.splice(index, 1);
     } else {
       this.selectedAdsets.push(adset.id);
 
-      // this.$store.getters.allAdset[adset.id].color = '#9c27b0';
+      this.$store.getters.allAdset[adset.id].color =
+        utils.colors[this.colorIndex];
+      this.usedColors.push(this.colorIndex);
+
+      this.colorIndex = (this.colorIndex + 1) % 14;
+
+      console.log("a", this.usedColors, this.colorIndex);
+
+      while (
+        this.usedColors.length !== utils.colors.length &&
+        this.usedColors.indexOf(this.colorIndex) !== -1
+      ) {
+        this.colorIndex = (this.colorIndex + 1) % 14;
+      }
     }
     this.$store.commit("setSelectedAdsets", this.selectedAdsets);
+  }
+
+  private componentToHex(c: number) {
+    const hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }
+
+  private rgbToHex(r: number, g: number, b: number) {
+    return (
+      "#" +
+      this.componentToHex(r) +
+      this.componentToHex(g) +
+      this.componentToHex(b)
+    );
   }
 
   private mounted() {
@@ -98,8 +128,9 @@ export default class App extends Vue {
     this.$store.commit("setMetric1", "clicks");
     this.$store.commit("setMetric2", "cpc");
 
-    for (let i = 0; i < this.$store.getters.allAdset.length; i++) {
+    for (let i = 0; i < 2; i++) {
       this.selectedAdsets.push(this.$store.getters.allAdset[i].id);
+      this.usedColors.push(i);
     }
     this.$store.commit("setSelectedAdsets", this.selectedAdsets);
     console.log(this.selectedAdsets);
