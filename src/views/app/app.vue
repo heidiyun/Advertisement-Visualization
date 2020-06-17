@@ -29,10 +29,7 @@
     <div class="visualization-wrapper">
       <v-layout class="mr-b-16">
         <div class="visualizations" style="width: 244px; height: 360px;">
-          <div class="adset-list-header">
-            <div class="title">애드셋 목록</div>
-            <div class="option"></div>
-          </div>
+          <div class="title">애드셋 목록</div>
           <div class="adset-list component-area">
             <div
               class="adset-item d-flex"

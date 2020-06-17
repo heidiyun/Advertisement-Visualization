@@ -30,23 +30,25 @@
   padding: 16px 20px;
 }
 
-.adset-list-header {
-  display: flex;
-  align-content: space-between;
-  justify-content: space-between;
-  .option {
-    height: 20px;
-    line-height: 24px;
-    font-size: x-small;
-    color: rgb(0, 0, 0, 0.4);
-    cursor: pointer;
-  }
-}
+// .adset-list-header {
+//   display: flex;
+//   align-content: space-between;
+//   justify-content: space-between;
+//   margin-bottom: 16px;
+//   .option {
+//     height: 20px;
+//     line-height: 24px;
+//     font-size: x-small;
+//     color: rgb(0, 0, 0, 0.4);
+//     cursor: pointer;
+//   }
+// }
 
 .title {
   font-size: medium;
   font-weight: 600;
   height: 20px;
+  margin-bottom: 16px;
 }
 
 .scatter-plot {
