@@ -128,7 +128,7 @@ export default class App extends Vue {
     this.$store.commit("setMetric1", "clicks");
     this.$store.commit("setMetric2", "cpc");
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 5; i++) {
       this.selectedAdsets.push(this.$store.getters.allAdset[i].id);
       this.usedColors.push(i);
     }

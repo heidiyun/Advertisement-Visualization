@@ -16,9 +16,9 @@
       </a-select>-->
       <a-dropdown style="margin: 0 8px;">
         <a-menu slot="overlay" @click="handleMenuClick">
-          <a-menu-item v-for="metric in metrics" :key="metric">{{
-            metric
-          }}</a-menu-item>
+          <a-menu-item v-for="metric in metrics" :key="metric">
+            {{ metric }}
+          </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px">
           {{ $store.getters.metric1 }}
@@ -31,7 +31,7 @@
         <div class="visualizations" style="width: 244px; height: 360px;">
           <div class="adset-list-header">
             <div class="title">애드셋 목록</div>
-            <div class="option">전체선택</div>
+            <div class="option"></div>
           </div>
           <div class="adset-list component-area">
             <div
