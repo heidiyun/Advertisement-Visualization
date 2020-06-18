@@ -101,7 +101,6 @@ export default class MultipleScatterPlot extends Vue {
         });
       });
     });
-    console.log("adsets", this.data);
     this.renderScatterPlot();
   }
 
