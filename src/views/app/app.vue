@@ -44,7 +44,12 @@
               ></div>
 
               <div class="adset-color" v-else></div>
-              <div class="adset-name">{{ adset.name }}</div>
+              <div
+                class="adset-name"
+                :selected="selectedAdsets.indexOf(adset.id) !== -1"
+              >
+                {{ adset.name }}
+              </div>
             </div>
           </div>
         </div>
@@ -56,13 +61,13 @@
           </div>
         </div>
       </v-layout>
-      <div class="visualizations mr-b-16" style="height: 300px">
+      <div class="visualizations mr-b-16" style="height: 320px">
         <div class="title">시간별 추이</div>
         <div class="component-area">
           <line-graph></line-graph>
         </div>
       </div>
-      <div class="visualizations mr-b-16" style="height:380px">
+      <div class="visualizations mr-b-16" style="height:440px">
         <div class="title">애드셋 정보</div>
         <div class="component-area">
           <adset-table></adset-table>

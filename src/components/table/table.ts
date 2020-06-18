@@ -119,13 +119,21 @@ export default class Table extends Vue {
 
   public created() {
     this.columns = [
-      { title: "id", width: 100, dataIndex: "name", key: "name", fixed: "left" }
+      {
+        title: "id",
+        width: 100,
+        height: 30,
+        dataIndex: "name",
+        key: "name",
+        fixed: "left"
+      }
     ];
     dataSet.forEach((name: dataType, i: number) => {
       const data = {
         title: name,
         dataIndex: name,
         key: `${i}`,
+        height: 40,
         width:
           name.length < 12 ? 140 : name.indexOf("costPer") !== -1 ? 220 : 190,
         sorter: (a: TableData, b: TableData) =>

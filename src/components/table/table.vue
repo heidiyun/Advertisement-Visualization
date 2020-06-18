@@ -1,13 +1,15 @@
 <template>
   <div class="table-container">
-    <a-table
-      class="adset-table"
-      :columns="columns"
-      :data-source="filteredData"
-      :scroll="{ x: 1500, y: 285 }"
-      row-key="name"
-      :pagination="false"
-    />
+    <div class="table-wrapper">
+      <a-table
+        class="adset-table"
+        :columns="columns"
+        :data-source="filteredData"
+        :scroll="{ x: 1500, y: 332 }"
+        row-key="name"
+        :pagination="false"
+      />
+    </div>
   </div>
 </template>
 

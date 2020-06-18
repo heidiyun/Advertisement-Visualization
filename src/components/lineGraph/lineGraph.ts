@@ -33,7 +33,7 @@ export default class LineGraph extends Vue {
     space: 0,
     paddingX: 40,
     textX: 40,
-    paddingY: 30,
+    paddingY: 10,
     textY: 20,
     max: 1200
   };
@@ -67,18 +67,23 @@ export default class LineGraph extends Vue {
     this.updateXAxis(size);
   }
 
-  public updateMetric(metric: string) {
-    this.svg
-      .append("text")
-      .text(`${metric}`)
-      .attr("y", this.setting.paddingY - 20)
-      .style("fill", "#ccc")
-      .attr("x", this.setting.paddingX - 4);
-  }
+  // public updateMetric(metric: string) {
+  //   this.svg
+  //     .append("text")
+  //     .text(`${metric}`)
+  //     .attr("y", this.setting.paddingY - 20)
+  //     .style("fill", "#ccc")
+  //     .attr("x", this.setting.paddingX - 4);
+  // }
 
   public updateGraph(width: number, height: number) {
+    const result: Array<{
+      points: Point[];
+      color: string;
+    }> = [];
     this.data.forEach(data => {
       const points: Point[] = [];
+      // const result: Array<Point[]> = [];
       let i = 0;
       data.insights.forEach((value: number) => {
         const cx =
@@ -95,14 +100,17 @@ export default class LineGraph extends Vue {
           .attr("cy", cy)
           .attr("fill", data.color)
           .style("stroke", "#ffffff")
-          .attr("r", 3);
+          .attr("r", 4);
         i++;
       });
+      result.push({ points, color: data.color });
+    });
+    result.reverse().forEach(point => {
       this.svg
         .append("path")
-        .attr("d", line(points))
+        .attr("d", line(point.points))
         .attr("fill", "none")
-        .style("stroke", data.color)
+        .style("stroke", point.color)
         .attr("stroke-width", "1.9")
         .lower();
     });

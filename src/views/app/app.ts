@@ -22,7 +22,8 @@ export default class App extends Vue {
   private metrics: string[] = [];
   private selectedAdsets: number[] = [];
   private usedColors: number[] = [];
-  private colorIndex = 2;
+  private colorIndex = 5;
+  private size = "small";
 
   public onChange(date: moment.Moment[], dateString: string[]) {
     // this.momentRange = [moment(dateString, 'YYYY-MM-DD'), moment(dateString, 'YYYY-MM-DD')];
