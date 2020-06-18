@@ -1,4 +1,4 @@
-import { Vue, Component, Watch } from "vue-property-decorator";
+import { Vue, Component, Watch, Prop } from "vue-property-decorator";
 import * as d3 from "d3";
 
 interface DotType {
@@ -41,16 +41,13 @@ type metricType =
   | "costPerUniqueClick";
 
 @Component({})
-export default class ScatterPlot extends Vue {
+export default class MultipleScatterPlot extends Vue {
+  @Prop({ default: "clicks" }) metric2!: string;
   public $refs!: Vue["$refs"] & {
-    "scatter-plot": HTMLElement;
+    "multiple-scatter-plot": HTMLElement;
   };
-  private data: Array<DotType> = [];
-  // private data = this.adsets;
 
-  private get metric2() {
-    return this.$store.getters.metric2;
-  }
+  private data: Array<DotType> = [];
 
   private metric2List: metricType[] = [
     "clicks",
@@ -71,31 +68,32 @@ export default class ScatterPlot extends Vue {
   ];
 
   private ui: UIType = {
-    margin: { top: 10, bottom: 20, left: 5, right: 5 },
+    margin: { top: 5, bottom: 20, left: 5, right: 5 },
     width: 0,
     height: 0,
-    dotSize: 5,
+    dotSize: 3.5,
     dotCountPerAdset: 10
   };
 
   private svg: any;
-  private tooltip: any;
-  private xAxis: any;
-  private yAxis: any;
+  private xScale: any;
+  private yScale: any;
   private dots: any;
 
-  @Watch("$store.getters.adsetsForScatterPlot")
+  @Watch("$store.getters.adsetsForMultiples")
   private onAdsetsChange(adsets: any) {
-    console.log("change adsets", adsets);
+    console.log("[CHANGE ADSETS]", adsets);
     this.data = [];
+
+    //  { [key: number]: { colors: string } }
     adsets.forEach((adset: any) => {
-      adset.insights.forEach((v: [number, number], k: string) => {
+      adset.insights.forEach((v: { [metric: string]: number }, k: string) => {
         this.data.push({
           dotID: adset.id + "-" + k,
           name: adset.name,
           date: [k],
-          metric1: v[0],
-          metric2: v[1],
+          metric1: v[this.$store.getters.metric1],
+          metric2: v[this.metric2],
           color: adset.color,
           bidStrategy: adset.bidStrategy,
           billingEvent: adset.billingEvent,
@@ -103,44 +101,15 @@ export default class ScatterPlot extends Vue {
         });
       });
     });
+    console.log("adsets", this.data);
     this.renderScatterPlot();
-  }
-
-  // @Watch("selectedMetric", { deep: true })
-  // onMetricChange(newVal: { 1?: string; 2?: string }) {
-  //   console.log("[ON CHANGE METRIC]", newVal);
-  //   // const temp = [];
-  //   // const adsetCount = 1;
-  //   // const dotCountPerAdset = 10;
-  //   // if (newVal[1] && newVal[2]) {
-  //   //   for (let i = 0; i < adsetCount; i++) {
-  //   //     const c = Math.random() * 360;
-  //   //     for (let j = 1; j <= dotCountPerAdset; j++) {
-  //   //       temp.push({
-  //   //         x: Math.random() * 100,
-  //   //         y: Math.random() * 100,
-  //   //         colorHSL: {
-  //   //           h: c,
-  //   //           s: 0.5,
-  //   //           l: j / dotCountPerAdset === 0 ? 0.05 : j / dotCountPerAdset === 1 ? 0.95 :  j / dotCountPerAdset
-  //   //         }
-  //   //       });
-  //   //     }
-  //   //   }
-  //   // }
-
-  //   // this.data = temp;
-  //   this.renderScatterPlot();
-  // }
-
-  private changeMetric2(value: string) {
-    this.$store.commit("setMetric2", value);
-    console.log("[CHANGE METRIC 2]", value);
   }
 
   private initScatterPlot() {
     // x축 그리기
-    this.xAxis = d3
+    // const x = d3.scale.linear().domain([0, 0]);
+
+    this.xScale = d3
       .scaleLinear()
       .domain([0, 0])
       .range([0, this.ui.width]);
@@ -149,10 +118,10 @@ export default class ScatterPlot extends Vue {
       .attr("class", "xAxis")
       .attr("transform", "translate(0, " + this.ui.height + ")")
       .style("color", "#888")
-      .call(d3.axisBottom(this.xAxis));
+      .call(d3.axisBottom(this.xScale).tickSize(2));
 
     // y축 그리기
-    this.yAxis = d3
+    this.yScale = d3
       .scaleLinear()
       .domain([0, 0])
       .range([this.ui.height, 0]);
@@ -160,13 +129,13 @@ export default class ScatterPlot extends Vue {
       .append("g")
       .attr("class", "yAxis")
       .style("color", "#888")
-      .call(d3.axisLeft(this.yAxis));
+      .call(d3.axisLeft(this.yScale).tickSize(2));
   }
 
   private renderScatterPlot() {
     const yGuideWidth =
       (Math.max(...this.data.map(d => d.metric1)).toFixed(0) + "").length * 8;
-    d3.select(`#scatter-plot-graph`).attr(
+    d3.select(`#multiple-scatter-plot-graph-${this.metric2}`).attr(
       "transform",
       "translate(" +
         (this.ui.margin.left + yGuideWidth) +
@@ -175,18 +144,28 @@ export default class ScatterPlot extends Vue {
         ")"
     );
     // x 축 update
-    this.xAxis = d3
+    this.xScale = d3
       .scaleLinear()
       .domain([0, Math.max(...this.data.map(d => d.metric2), 0)])
       .range([0, this.ui.width - yGuideWidth]);
-    this.svg.selectAll("g.xAxis").call(d3.axisBottom(this.xAxis));
+    this.svg.selectAll("g.xAxis").call(
+      d3
+        .axisBottom(this.xScale)
+        .ticks(3)
+        .tickSize(2)
+    );
 
     // y축 update
-    this.yAxis = d3
+    this.yScale = d3
       .scaleLinear()
       .domain([0, Math.max(...this.data.map(d => d.metric1), 0)])
       .range([this.ui.height, 0]);
-    this.svg.selectAll("g.yAxis").call(d3.axisLeft(this.yAxis));
+    this.svg.selectAll("g.yAxis").call(
+      d3
+        .axisLeft(this.yScale)
+        .ticks(5)
+        .tickSize(2)
+    );
 
     if (this.dots) this.svg.selectAll("g.circle").remove();
     this.dots = this.svg
@@ -196,52 +175,53 @@ export default class ScatterPlot extends Vue {
       .data(this.data)
       .enter()
       .append("circle")
-      .attr("cx", (d: DotType) => this.xAxis(d.metric2))
-      .attr("cy", (d: DotType) => this.yAxis(d.metric1))
+      .attr("cx", (d: DotType) => this.xScale(d.metric2))
+      .attr("cy", (d: DotType) => this.yScale(d.metric1))
       .attr("r", this.ui.dotSize)
       .style(
         "fill",
         (d: DotType) => d.color
         // color change
-      )
-      .on("mouseover", (d: DotType) => {
-        this.tooltip
-          .style("display", "block")
-          .style("top", this.yAxis(d.metric1) - 90 + "px")
-          .style("left", this.xAxis(d.metric2) + "px")
-          .style("z-index", 100).html(`
-            <div>
-              <div style="display: flex;">
-                <div style="font-weight: bold">${d.name}</div>
-              </div>
-              <div style="display: flex; justify-content: flex-end;">
-                <div style="font-size: 10px;">${
-                  d.date.length === 1
-                    ? d.date[0]
-                    : d.date[0] + "<br/> &nbsp;~" + d.date[d.date.length - 1]
-                }</div>
-              </div>
-              <div style="width: 100%; border-top: solid .5px #ccc; padding-left: -2px; margin-bottom: 4px;"></div>
-              <div style="display: flex;">
-                <div style="font-weight: bold">${
-                  this.$store.getters.metric1
-                }: &nbsp;</div>
-                <div>${
-                  Number.isInteger(d.metric1) ? d.metric1 : d.metric1.toFixed(2)
-                }</div></div>
-              <div style="display: flex;">
-                <div style="font-weight: bold">${
-                  this.$store.getters.metric2
-                }: &nbsp;</div>
-                <div>${
-                  Number.isInteger(d.metric2) ? d.metric2 : d.metric2.toFixed(2)
-                }</div></div>
-            </div>
-          `);
-      })
-      .on("mouseout", (d: DotType) => {
-        this.tooltip.style("display", "none");
-      });
+      );
+    // .on("mouseover", (d: DotType) => {
+    //   this.tooltip
+    //     .style("display", "block")
+    //     .style("left", this.xScale(d.metric2) + "px")
+    //     .style("top", this.yScale(d.metric1) - 90 + "px")
+    //     .style("z-index", 100)
+    //     .html(`
+    //       <div>
+    //         <div style="display: flex;">
+    //           <div style="font-weight: bold">${d.name}</div>
+    //         </div>
+    //         <div style="display: flex; justify-content: flex-end;">
+    //           <div style="font-size: 10px;">${
+    //             d.date.length === 1
+    //               ? d.date[0]
+    //               : d.date[0] + "<br/> &nbsp;~" + d.date[d.date.length - 1]
+    //           }</div>
+    //         </div>
+    //         <div style="width: 100%; border-top: solid .5px #ccc; padding-left: -2px; margin-bottom: 4px;"></div>
+    //         <div style="display: flex;">
+    //           <div style="font-weight: bold">${
+    //             this.$store.getters.metric1
+    //           }: &nbsp;</div>
+    //           <div>${
+    //             Number.isInteger(d.metric1) ? d.metric1 : d.metric1.toFixed(2)
+    //           }</div></div>
+    //         <div style="display: flex;">
+    //           <div style="font-weight: bold">${
+    //             this.$store.getters.metric2
+    //           }: &nbsp;</div>
+    //           <div>${
+    //             Number.isInteger(d.metric2) ? d.metric2 : d.metric2.toFixed(2)
+    //           }</div></div>
+    //       </div>
+    //     `);
+    // })
+    // .on("mouseout", (d: DotType) => {
+    //   this.tooltip.style("display", "none");
+    // });
   }
 
   private hexToHSL(hex: string): { h: number; s: number; l: number } {
@@ -279,37 +259,38 @@ export default class ScatterPlot extends Vue {
   }
   private mounted() {
     this.ui.width =
-      this.$refs["scatter-plot"].clientWidth -
+      this.$refs["multiple-scatter-plot"].clientWidth -
       this.ui.margin.left -
       this.ui.margin.right;
     this.ui.height =
-      this.$refs["scatter-plot"].clientHeight -
+      this.$refs["multiple-scatter-plot"].clientHeight -
       this.ui.margin.top -
       this.ui.margin.bottom;
     // svg 생성
     this.svg = d3
-      .select("#scatter-plot")
+      .select(`#multiple-scatter-plot-${this.metric2}`)
       .append("svg")
+      .attr("class", `multiple-scatter-plot-${this.metric2}`)
       .style("width", "100%")
       .style("height", "100%")
       .append("g")
-      .attr("id", `scatter-plot-graph`)
+      .attr("id", `multiple-scatter-plot-graph-${this.metric2}`)
       .attr(
         "transform",
         "translate(" + this.ui.margin.left + "," + this.ui.margin.top + ")"
       );
 
     // tooltip 생성
-    this.tooltip = d3
-      .select("#scatter-plot")
-      .append("div")
-      .attr("class", "tooltip")
-      .style("position", "absolute")
-      .style("display", "none")
-      .style("background", "#eee")
-      .style("padding", "4px 12px")
-      .style("border-radius", "8px")
-      .style("opacity", 0.9);
+    // this.tooltip = d3
+    //   .select(`#multiple-scatter-plot-${this.metric2}`)
+    //   .append("div")
+    //   .attr("class", "tooltip")
+    //   .style("position", "absolute")
+    //   .style("display", "none")
+    //   .style("background", "#eee")
+    //   .style("padding", "4px 12px")
+    //   .style("border-radius", "8px")
+    //   .style("opacity", 0.9);
 
     this.initScatterPlot();
     // this.onMetricChange(this.selectedMetric);

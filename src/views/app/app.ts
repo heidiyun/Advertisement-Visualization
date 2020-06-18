@@ -3,7 +3,8 @@ import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import AdsetTable from "@/components/table";
 import LineGraph from "@/components/lineGraph";
-import ScatterPlot from "@/components/scatterPlot";
+import scatterPlot from "@/components/scatterPlot";
+import MultipleScatterPlot from "@/components/multipleScatterPlot";
 import * as data from "@/data/advertisements-d.json";
 import Adset from "@/model/Adset";
 import moment from "moment";
@@ -13,7 +14,8 @@ Vue.use(Antd);
 
 Vue.component("adset-table", AdsetTable);
 Vue.component("line-graph", LineGraph);
-Vue.component("scatter-plot", ScatterPlot);
+Vue.component("scatter-plot", scatterPlot);
+Vue.component("multiple-scatter-plot", MultipleScatterPlot);
 
 @Component({})
 export default class App extends Vue {

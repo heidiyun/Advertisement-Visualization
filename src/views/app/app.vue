@@ -68,9 +68,181 @@
           </div>
         </div>
       </v-layout>
-      <div class="visualizations mr-b-16" style="height: 320px">
-        <div class="title">상관관계 분석</div>
+      <v-layout class="mr-b-16">
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">clicks</div>
+          <div class="component-area" style="flex: 1;">
+            <multiple-scatter-plot metric2="clicks"></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">cpc</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot metric2="cpc"></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">uniqueClicks</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="uniqueClicks"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1;"
+        >
+          <div class="multiple-scatter-plot-title">impressions</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="impressions"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+      </v-layout>
+      <v-layout class="mr-b-16" style>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">cpm</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot metric2="cpm"></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">spend</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot metric2="spend"></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">reach</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot metric2="reach"></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1;"
+        >
+          <div class="multiple-scatter-plot-title">purchase</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot metric2="purchase"></multiple-scatter-plot>
+          </div>
+        </div>
+      </v-layout>
+      <v-layout class="mr-b-16" style>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">omniPurchase</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="omniPurchase"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">mobileAppInstall</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="mobileAppInstall"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">omniAppInstall</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="omniAppInstall"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1;"
+        >
+          <div class="multiple-scatter-plot-title">costPerPurchase</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="costPerPurchase"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+      </v-layout>
+      <v-layout class="mr-b-16" style>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">costPerOmniPurchase</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="costPerOmniPurchase"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">costPerMobileAppInstall</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="costPerMobileAppInstall"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
+        >
+          <div class="multiple-scatter-plot-title">costPerOmniInstall</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="costPerOmniInstall"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+        <div
+          class="visualizations padding-small"
+          style="height: 150px; display: flex; flex-direction: column; flex: 1;"
+        >
+          <div class="multiple-scatter-plot-title">costPerUniqueClick</div>
+          <div class="component-area" style="flex: 1">
+            <multiple-scatter-plot
+              metric2="costPerUniqueClick"
+            ></multiple-scatter-plot>
+          </div>
+        </div>
+      </v-layout>
+      <div class="visualizations mr-b-16" style="height: 360px; flex: 1;">
         <div class="component-area">
+          <div class="title">상관관계 분석</div>
           <scatter-plot></scatter-plot>
         </div>
       </div>
