@@ -35,7 +35,7 @@
     </div>
     <div class="visualization-wrapper">
       <v-layout class="mr-b-16">
-        <div class="visualizations" style="width: 244px; height: 360px;">
+        <div class="visualizations" style="width: 180px; height: 360px;">
           <div class="title">애드셋 목록</div>
           <div class="adset-list component-area">
             <div
@@ -61,17 +61,17 @@
           </div>
         </div>
         <v-spacer></v-spacer>
-        <div class="visualizations scatter-plot">
-          <div class="title">상관관계 분석</div>
+        <div class="visualizations line-graph">
+          <div class="title">시간별 추이</div>
           <div class="component-area">
-            <scatter-plot></scatter-plot>
+            <line-graph></line-graph>
           </div>
         </div>
       </v-layout>
       <div class="visualizations mr-b-16" style="height: 320px">
-        <div class="title">시간별 추이</div>
+        <div class="title">상관관계 분석</div>
         <div class="component-area">
-          <line-graph></line-graph>
+          <scatter-plot></scatter-plot>
         </div>
       </div>
       <div class="visualizations mr-b-16" style="height:440px">
