@@ -102,6 +102,10 @@ export default new Vuex.Store<State>({
         return [];
       }
 
+      if (!state.metric1) {
+        return state.adsets;
+      }
+
       return utils
         .filterAdset(state.date, state.adsets, true)
         .filter(adset => state.selectedAdsets?.indexOf(adset.id) !== -1);
