@@ -55,15 +55,7 @@
   height: 20px;
   margin-bottom: 20px;
 }
-.multiple-scatter-plot-title {
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  // padding-left: 36px;
-}
-.padding-small {
-  padding: 8px;
-}
+
 
 .line-graph {
   height: 360px;
@@ -132,4 +124,29 @@
 }
 .adset-list::-webkit-scrollbar-track {
   background-color: white;
+}
+
+
+.multiple-scatter-plot-area {
+  .multiple-scatter-plot-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    // padding-left: 36px;
+  }
+  .padding-small {
+    padding: 8px;
+  }
+}
+
+.scatter-plot-guide {
+  font-size: medium;
+  font-weight: 500;
+  height: 20px;
+  text-align: center;
+  &.y-guide {
+    margin: auto 12px auto auto;
+    writing-mode: vertical-lr;
+    transform: rotate(0.5turn);
+  }
 }

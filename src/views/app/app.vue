@@ -110,7 +110,7 @@
           </div>
         </div>
       </v-layout>
-      <v-layout class="mr-b-16" style>
+      <v-layout class="mr-b-16">
         <div
           class="visualizations padding-small"
           style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
@@ -148,7 +148,7 @@
           </div>
         </div>
       </v-layout>
-      <v-layout class="mr-b-16" style>
+      <v-layout class="mr-b-16">
         <div
           class="visualizations padding-small"
           style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
@@ -194,7 +194,7 @@
           </div>
         </div>
       </v-layout> -->
-      <!-- <v-layout class="mr-b-16" style>
+      <!-- <v-layout class="mr-b-16">
         <div
           class="visualizations padding-small"
           style="height: 150px; display: flex; flex-direction: column; flex: 1; margin-right: 12px;"
@@ -242,10 +242,14 @@
       </v-layout> -->
       <div class="visualizations mr-b-16">
         <div class="title">Small Multiples</div>
-        <v-layout style="magrin-bottom: 12px;">
+        <v-layout
+          class="multiple-scatter-plot-area"
+          style="margin-bottom: 12px;"
+        >
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('clicks')"
           >
             <div class="multiple-scatter-plot-title">clicks</div>
             <multiple-scatter-plot
@@ -256,6 +260,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('cpc')"
           >
             <div class="multiple-scatter-plot-title">cpc</div>
             <multiple-scatter-plot
@@ -266,6 +271,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('uniqueClicks')"
           >
             <div class="multiple-scatter-plot-title">uniqueClicks</div>
             <multiple-scatter-plot
@@ -276,6 +282,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('impressions')"
           >
             <div class="multiple-scatter-plot-title">impressions</div>
             <multiple-scatter-plot
@@ -284,10 +291,14 @@
             ></multiple-scatter-plot>
           </div>
         </v-layout>
-        <v-layout style="magrin-bottom: 12px;">
+        <v-layout
+          class="multiple-scatter-plot-area"
+          style="margin-bottom: 12px;"
+        >
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('cpm')"
           >
             <div class="multiple-scatter-plot-title">cpm</div>
             <multiple-scatter-plot
@@ -298,6 +309,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('spend')"
           >
             <div class="multiple-scatter-plot-title">spend</div>
             <multiple-scatter-plot
@@ -308,6 +320,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('reach')"
           >
             <div class="multiple-scatter-plot-title">reach</div>
             <multiple-scatter-plot
@@ -318,6 +331,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('purchase')"
           >
             <div class="multiple-scatter-plot-title">purchase</div>
             <multiple-scatter-plot
@@ -326,10 +340,11 @@
             ></multiple-scatter-plot>
           </div>
         </v-layout>
-        <v-layout style="magrin-bottom: 12px;">
+        <v-layout class="multiple-scatter-plot-area">
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('omniPurchase')"
           >
             <div class="multiple-scatter-plot-title">omniPurchase</div>
             <multiple-scatter-plot
@@ -340,6 +355,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('omniAppInstall')"
           >
             <div class="multiple-scatter-plot-title">omniAppInstall</div>
             <multiple-scatter-plot
@@ -350,6 +366,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('mobileAppInstall')"
           >
             <div class="multiple-scatter-plot-title">mobileAppInstall</div>
             <multiple-scatter-plot
@@ -360,6 +377,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('costPerPurchase')"
           >
             <div class="multiple-scatter-plot-title">costPerPurchase</div>
             <multiple-scatter-plot
@@ -368,10 +386,14 @@
             ></multiple-scatter-plot>
           </div>
         </v-layout>
-        <v-layout style="magrin-bottom: 24px;">
+        <v-layout
+          class="multiple-scatter-plot-area"
+          style="margin-bottom: 12px;"
+        >
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('costPerOmniPurchase')"
           >
             <div class="multiple-scatter-plot-title">costPerOmniPurchase</div>
             <multiple-scatter-plot
@@ -382,9 +404,10 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('costPerMobileAppInstall')"
           >
             <div class="multiple-scatter-plot-title">
-              costPerMoblieAppInstall
+              costPerMobileAppInstall
             </div>
             <multiple-scatter-plot
               style="height: 150px; margin-right: 12px;"
@@ -394,6 +417,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('costPerOmniAppInstall')"
           >
             <div class="multiple-scatter-plot-title">costPerOmniAppInstall</div>
             <multiple-scatter-plot
@@ -404,6 +428,7 @@
           <div
             class="component-area"
             style="flex: 1; display: flex; flex-direction: column; margin-right: 8px;"
+            @click="setMetric2('costPerUniqueClick')"
           >
             <div class="multiple-scatter-plot-title">costPerUniqueClick</div>
             <multiple-scatter-plot
@@ -413,13 +438,18 @@
           </div>
         </v-layout>
       </div>
-      <div class="visualizations mr-b-16" style="height: 360px; flex: 1;">
-        <div class="component-area">
-          <div class="title">상관관계 분석</div>
+      <div
+        class="visualizations mr-b-16"
+        style="display: flex; flex-direction: column; height: 360px; flex: 1;"
+      >
+        <div class="title">상관관계 분석</div>
+        <div class="component-area" style="display: flex; flex: 1;">
+          <div class="scatter-plot-guide y-guide">{{ metric1 }}</div>
           <scatter-plot></scatter-plot>
         </div>
+        <div class="scatter-plot-guide">{{ metric2 }}</div>
       </div>
-      <div class="visualizations mr-b-16" style="height:440px">
+      <div class="visualizations mr-b-16" style="height:440px;">
         <div class="title">애드셋 정보</div>
         <div class="component-area">
           <adset-table></adset-table>

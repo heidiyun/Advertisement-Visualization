@@ -27,6 +27,17 @@ export default class App extends Vue {
   private colorIndex = 5;
   private size = "small";
 
+  private get metric1() {
+    return this.$store.getters.metric1;
+  }
+  private get metric2() {
+    return this.$store.getters.metric2;
+  }
+
+  private setMetric2(value: string) {
+    this.$store.commit("setMetric2", value);
+  }
+
   public onChange(date: moment.Moment[], dateString: string[]) {
     // this.momentRange = [moment(dateString, 'YYYY-MM-DD'), moment(dateString, 'YYYY-MM-DD')];
 
