@@ -167,14 +167,14 @@ export default class ScatterPlot extends Vue {
     // x 축 update
     this.xAxis = d3
       .scaleLinear()
-      .domain([0, Math.max(...this.data.map(d => d.metric1), 0)])
+      .domain([0, Math.max(...this.data.map(d => d.metric2), 0)])
       .range([0, this.ui.width]);
     this.svg.selectAll("g.xAxis").call(d3.axisBottom(this.xAxis));
 
     // y축 update
     this.yAxis = d3
       .scaleLinear()
-      .domain([0, Math.max(...this.data.map(d => d.metric2), 0)])
+      .domain([0, Math.max(...this.data.map(d => d.metric1), 0)])
       .range([this.ui.height, 0]);
     this.svg.selectAll("g.yAxis").call(d3.axisLeft(this.yAxis));
 
@@ -186,8 +186,8 @@ export default class ScatterPlot extends Vue {
       .data(this.data)
       .enter()
       .append("circle")
-      .attr("cx", (d: DotType) => this.xAxis(d.metric1))
-      .attr("cy", (d: DotType) => this.yAxis(d.metric2))
+      .attr("cx", (d: DotType) => this.xAxis(d.metric2))
+      .attr("cy", (d: DotType) => this.yAxis(d.metric1))
       .attr("r", this.ui.dotSize)
       .style(
         "fill",
@@ -200,8 +200,8 @@ export default class ScatterPlot extends Vue {
       .on("mouseover", (d: DotType) => {
         this.tooltip
           .style("display", "block")
-          .style("top", this.yAxis(d.metric2) - 90 + "px")
-          .style("left", this.xAxis(d.metric1) + "px")
+          .style("top", this.yAxis(d.metric1) - 90 + "px")
+          .style("left", this.xAxis(d.metric2) + "px")
           .style("z-index", 100).html(`
             <div>
               <div style="display: flex;">
