@@ -1,9 +1,13 @@
 <template>
   <div class="advertisement-app">
     <div class="button-contents">
-      <v-layout style="width:1090px; margin:auto; justify-content:flex-end;">
-        <a-range-picker @change="onChange" :defaultValue="momentRange" />
-        <!-- <a-select
+      <v-layout
+        style="width:1090px; margin:auto; justify-content:space-between;"
+      >
+        <span class="title" style="font-size:x-large">Dashboard</span>
+        <div>
+          <a-range-picker @change="onChange" :defaultValue="momentRange" />
+          <!-- <a-select
           default-value="metric1"
           style="width: 120px; margin: 0 8px;"
           @change="handleMenuClick"
@@ -14,18 +18,19 @@
             :value="metric"
             >{{ metric }}</a-select-option
           >
-        </a-select>-->
-        <a-dropdown style="margin: 0 8px;">
-          <a-menu slot="overlay" @click="handleMenuClick">
-            <a-menu-item v-for="metric in metrics" :key="metric">
-              {{ metric }}
-            </a-menu-item>
-          </a-menu>
-          <a-button style="margin-left: 8px">
-            {{ $store.getters.metric1 }}
-            <a-icon type="down" />
-          </a-button>
-        </a-dropdown>
+          </a-select>-->
+          <a-dropdown style="margin: 0 8px;">
+            <a-menu slot="overlay" @click="handleMenuClick">
+              <a-menu-item v-for="metric in metrics" :key="metric">
+                {{ metric }}
+              </a-menu-item>
+            </a-menu>
+            <a-button style="margin-left: 8px">
+              {{ $store.getters.metric1 }}
+              <a-icon type="down" />
+            </a-button>
+          </a-dropdown>
+        </div>
       </v-layout>
     </div>
     <div class="visualization-wrapper">
