@@ -2,19 +2,19 @@ import Adset from "@/model/Adset";
 
 const colors: string[] = [
   "#F44336",
-  "#3F51B5",
+  "#2196F3",
   "#009688",
   "#FFEB3B",
-  "#795548",
+  "#CDDC39",
   "#E91E63",
-  "#2196F3",
+  "#3F51B5",
   "#4CAF50",
   "#FF9800",
   "#9C27B0",
   "#00BCD4",
-  "#CDDC39",
   "#FF5722",
-  "#607D8B"
+  "#607D8B",
+  "#795548"
 ];
 
 const metrics: string[] = [];
