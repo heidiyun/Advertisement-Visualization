@@ -93,6 +93,19 @@ export default new Vuex.Store<State>({
         .filterAdset(state.date, state.adsets, false, [state.metric1])
         .filter(adset => state.selectedAdsets?.indexOf(adset.id) !== -1);
     },
+    adsetsForMultiples(state) {
+      if (!state.adsets) {
+        return [];
+      }
+
+      if (!state.date || state.date.length === 0) {
+        return [];
+      }
+
+      return utils
+        .filterAdset(state.date, state.adsets, true)
+        .filter(adset => state.selectedAdsets?.indexOf(adset.id) !== -1);
+    },
     adsets(state) {
       if (!state.adsets) {
         return [];
