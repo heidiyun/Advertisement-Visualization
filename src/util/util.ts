@@ -67,6 +67,7 @@ function filterAdset(
 
       if (insightKeys?.length === 2) {
         const metric2 = insightKeys?.[1];
+        console.log(metric2);
         insight.set(key.join("-"), [
           adset.insights.get(key.join("-"))[`${metric1}`],
           adset.insights.get(key.join("-"))[`${metric2}`]
