@@ -274,12 +274,23 @@
           <div style="width: 16px;"></div>
           <div class="flex-1">
             <div class="c-name">Correlation Analysis</div>
-            <div class="c-content">
-              <div class="component-area" style="display: flex; flex: 1;">
+            <div
+              class="c-content"
+              style="display: flex; flex-direction: column;"
+            >
+              <div
+                class="component-area"
+                style="flex: 1; display: flex; width: 100%; height: 100%;"
+              >
                 <div class="scatter-plot-guide y-guide">{{ metric1 }}</div>
                 <scatter-plot></scatter-plot>
               </div>
-              <div class="scatter-plot-guide">{{ metric2 }}</div>
+              <div
+                class="scatter-plot-guide"
+                style="height: 20px; margin-bottom: 12px;"
+              >
+                {{ metric2 }}
+              </div>
             </div>
           </div>
         </v-layout>

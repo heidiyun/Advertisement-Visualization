@@ -71,7 +71,7 @@ export default class ScatterPlot extends Vue {
   ];
 
   private ui: UIType = {
-    margin: { top: 10, bottom: 20, left: 5, right: 5 },
+    margin: { top: 10, bottom: 16, left: 5, right: 5 },
     width: 0,
     height: 0,
     dotSize: 5,
@@ -161,6 +161,11 @@ export default class ScatterPlot extends Vue {
   private renderScatterPlot() {
     const yGuideWidth =
       (Math.max(...this.data.map(d => d.metric1)).toFixed(0) + "").length * 8;
+    this.ui.width =
+      this.$refs["scatter-plot"].clientWidth -
+      this.ui.margin.left -
+      this.ui.margin.right -
+      yGuideWidth;
     d3.select(`#scatter-plot-graph`).attr(
       "transform",
       "translate(" +

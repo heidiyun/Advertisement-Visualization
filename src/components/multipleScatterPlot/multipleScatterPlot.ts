@@ -150,7 +150,7 @@ export default class MultipleScatterPlot extends Vue {
     this.svg.selectAll("g.xAxis").call(
       d3
         .axisBottom(this.xScale)
-        .ticks(3)
+        .ticks(0)
         .tickSize(2)
     );
 
@@ -162,7 +162,7 @@ export default class MultipleScatterPlot extends Vue {
     this.svg.selectAll("g.yAxis").call(
       d3
         .axisLeft(this.yScale)
-        .ticks(3)
+        .ticks(0)
         .tickSize(2)
     );
 
