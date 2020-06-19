@@ -138,7 +138,7 @@ export default class Table extends Vue {
           name.length < 12
             ? name.length < 8
               ? 105
-              : 125
+              : 130
             : name.indexOf("costPer") !== -1
             ? 195
             : 175,
