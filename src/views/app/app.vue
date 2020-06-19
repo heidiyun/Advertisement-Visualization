@@ -60,10 +60,12 @@
           <div class="flex-1">
             <div class="c-name">Small Multiples</div>
             <div class="c-content">
-              <div style="width: 100%; height: 100%; padding: 2px 10px 0">
+              <div
+                style="width: 100%; height: 100%; padding: 2px 10px 0; display: flex; flex-direction: column;"
+              >
                 <v-layout
                   class="multiple-scatter-plot-area"
-                  style="margin-bottom: 12px;"
+                  style="margin-bottom: 12px; flex: 1;"
                 >
                   <div
                     class="component-area"
@@ -112,7 +114,7 @@
                 </v-layout>
                 <v-layout
                   class="multiple-scatter-plot-area"
-                  style="margin-bottom: 12px;"
+                  style="margin-bottom: 12px; flex: 1;"
                 >
                   <div
                     class="component-area"
@@ -159,7 +161,10 @@
                     ></multiple-scatter-plot>
                   </div>
                 </v-layout>
-                <v-layout class="multiple-scatter-plot-area">
+                <v-layout
+                  class="multiple-scatter-plot-area"
+                  style="margin-bottom: 12px; flex: 1;"
+                >
                   <div
                     class="component-area"
                     style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
@@ -211,10 +216,7 @@
                     ></multiple-scatter-plot>
                   </div>
                 </v-layout>
-                <v-layout
-                  class="multiple-scatter-plot-area"
-                  style="margin-bottom: 12px;"
-                >
+                <v-layout class="multiple-scatter-plot-area" style="flex: 1;">
                   <div
                     class="component-area"
                     style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
