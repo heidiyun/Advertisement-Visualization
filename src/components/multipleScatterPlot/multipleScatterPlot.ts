@@ -132,8 +132,8 @@ export default class MultipleScatterPlot extends Vue {
   }
 
   private renderScatterPlot() {
-    const yGuideWidth =
-      (Math.max(...this.data.map(d => d.metric1)).toFixed(0) + "").length * 8;
+    const yGuideWidth = 0;
+    // (Math.max(...this.data.map(d => d.metric1)).toFixed(0) + "").length * 8;
     d3.select(`#multiple-scatter-plot-graph-${this.metric2}`).attr(
       "transform",
       "translate(" +

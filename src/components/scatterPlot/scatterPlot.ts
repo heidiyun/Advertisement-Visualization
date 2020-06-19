@@ -216,8 +216,8 @@ export default class ScatterPlot extends Vue {
         this.tooltip
           .style("display", "block")
           .style("top", this.yAxis(d.metric1) - 90 + "px")
-          .style("left", this.xAxis(d.metric2) + "px")
-          .style("z-index", 100).html(`
+          .style("left", this.xAxis(d.metric2) - 30 + "px")
+          .style("z-index", 10).html(`
             <div>
               <div style="display: flex;">
                 <div style="font-weight: bold">${d.name}</div>

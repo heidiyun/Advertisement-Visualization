@@ -65,207 +65,210 @@
               >
                 <v-layout
                   class="multiple-scatter-plot-area"
-                  style="margin-bottom: 12px; flex: 1;"
+                  style="height: 25%; padding: 8px 0;"
                 >
                   <div
                     class="component-area"
-                    style="width: 22%;  display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%;  display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('clicks')"
                   >
                     <div class="multiple-scatter-plot-title">clicks</div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="clicks"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('cpc')"
                   >
                     <div class="multiple-scatter-plot-title">cpc</div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="cpc"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('uniqueClicks')"
                   >
                     <div class="multiple-scatter-plot-title">uniqueClicks</div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="uniqueClicks"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('impressions')"
                   >
                     <div class="multiple-scatter-plot-title">impressions</div>
                     <multiple-scatter-plot
-                      style="height: 55px; "
+                      style="flex: 1; "
                       metric2="impressions"
                     ></multiple-scatter-plot>
                   </div>
                 </v-layout>
                 <v-layout
                   class="multiple-scatter-plot-area"
-                  style="margin-bottom: 12px; flex: 1;"
+                  style="height: 25%; padding: 8px 0;"
                 >
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('cpm')"
                   >
                     <div class="multiple-scatter-plot-title">cpm</div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="cpm"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('spend')"
                   >
                     <div class="multiple-scatter-plot-title">spend</div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="spend"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('reach')"
                   >
                     <div class="multiple-scatter-plot-title">reach</div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="reach"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('purchase')"
                   >
                     <div class="multiple-scatter-plot-title">purchase</div>
                     <multiple-scatter-plot
-                      style="height: 55px; "
+                      style="flex: 1; "
                       metric2="purchase"
                     ></multiple-scatter-plot>
                   </div>
                 </v-layout>
                 <v-layout
                   class="multiple-scatter-plot-area"
-                  style="margin-bottom: 12px; flex: 1;"
+                  style="height: 25%; padding: 8px 0;"
                 >
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('omniPurchase')"
                   >
                     <div class="multiple-scatter-plot-title">omniPurchase</div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="omniPurchase"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('omniAppInstall')"
                   >
                     <div class="multiple-scatter-plot-title">
                       omniAppInstall
                     </div>
                     <multiple-scatter-plot
-                      style="height: 55px; "
+                      style="flex: 1; "
                       metric2="omniAppInstall"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('mobileAppInstall')"
                   >
                     <div class="multiple-scatter-plot-title">
                       mobileAppInstall
                     </div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="mobileAppInstall"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('costPerPurchase')"
                   >
                     <div class="multiple-scatter-plot-title">
                       costPerPurchase
                     </div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="costPerPurchase"
                     ></multiple-scatter-plot>
                   </div>
                 </v-layout>
-                <v-layout class="multiple-scatter-plot-area" style="flex: 1;">
+                <v-layout
+                  class="multiple-scatter-plot-area"
+                  style="height: 25%; padding: 8px 0;"
+                >
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('costPerOmniPurchase')"
                   >
                     <div class="multiple-scatter-plot-title">
                       costPerOmniPurchase
                     </div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="costPerOmniPurchase"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('costPerMobileAppInstall')"
                   >
                     <div class="multiple-scatter-plot-title">
                       costPerMobileAppInstall
                     </div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="costPerMobileAppInstall"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('costPerOmniAppInstall')"
                   >
                     <div class="multiple-scatter-plot-title">
                       costPerOmniAppInstall
                     </div>
                     <multiple-scatter-plot
-                      style="height: 55px; margin-right: 12px;"
+                      style="flex: 1; margin-right: 12px;"
                       metric2="costPerOmniAppInstall"
                     ></multiple-scatter-plot>
                   </div>
                   <div
                     class="component-area"
-                    style="width: 22%;   display: flex; flex-direction: column; margin-right: 8px;"
+                    style="height: 100%; display: flex; flex-direction: column; margin-right: 8px;"
                     @click="setMetric2('costPerUniqueClick')"
                   >
                     <div class="multiple-scatter-plot-title">
                       costPerUniqueClick
                     </div>
                     <multiple-scatter-plot
-                      style="height: 55px;"
+                      style="flex: 1;"
                       metric2="costPerUniqueClick"
                     ></multiple-scatter-plot>
                   </div>

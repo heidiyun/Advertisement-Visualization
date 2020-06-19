@@ -68,6 +68,9 @@
 .component-area {
   width: 100%;
   height: calc(100% - 40px);
+  &.clicked {
+    border: solid 1px #777;
+  }
 }
 
 .adset-list {
@@ -131,7 +134,7 @@
 
 
 .multiple-scatter-plot-area {
-  height: 21% !important;
+  display: flex;
   .component-area {
     &:hover {
       cursor: pointer;
@@ -140,8 +143,8 @@
   .multiple-scatter-plot-title {
     font-size: 8px;
     font-weight: 500;
-    height: 100% !important;
     text-align: center;
+    height: 12px;
     // padding-left: 36px;
   }
   .padding-small {
