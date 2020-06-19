@@ -1,14 +1,13 @@
 .advertisement-app {
-  background: white;
+  background: #f4f6f8;
   // padding: 24px;
-  // display: flex;
-  // justify-content: center;
+  display: flex;
+  justify-content: center;
   width: 100%;
-  height: 100vh;
 
   .visualization-wrapper {
     margin: auto;
-    width: calc(100% - 32px);
+    width: 1080px;
     padding: 68px 0px 20px 0px;
   }
 }
@@ -17,13 +16,12 @@
   // margin: auto;
 
   padding: 0 10px;
-  height: 50px;
-  padding-top: 10px;
-  background-color: white;
+  height: 60px;
+  padding-top: 14px;
+  background-color: #f4f6f8;
   flex-direction: row-reverse;
-  border-bottom: 1px solid rgb(217, 217, 217);
-  // position: fixed;
-  // z-index: 10;
+  position: fixed;
+  z-index: 10;
 }
 
 .mr-b-16 {
@@ -52,17 +50,16 @@
 // }
 
 .title {
-  font-size: 14px;
+  font-size: medium;
   font-weight: 600;
   height: 20px;
-  padding-left: 4px;
   margin-bottom: 20px;
 }
 
 
 .line-graph {
-  height: 300px;
-  width: 600px;
+  height: 360px;
+  width: 882px;
 }
 
 .component-area {
@@ -84,23 +81,23 @@
 
   .adset-item {
     width: 200px;
-    height: 30px;
-    padding: 8px;
+    height: 40px;
+    padding: 10px;
     cursor: pointer;
     // margin: auto;
     // justify-content: center;
     // align-items: center;
 
     .adset-color {
-      width: 13px !important;
-      height: 13px;
+      width: 15px !important;
+      height: 15px;
       border-radius: 50%;
     }
     .adset-name {
       width: 100px;
       padding-left: 16px;
-      line-height: 13px;
-      font-size: 13px;
+      line-height: 15px;
+      font-size: 15px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -131,16 +128,14 @@
 
 
 .multiple-scatter-plot-area {
-  height: 21% !important;
   .component-area {
     &:hover {
       cursor: pointer;
     }
   }
   .multiple-scatter-plot-title {
-    font-size: 8px;
-    font-weight: 500;
-    height: 100% !important;
+    font-size: 12px;
+    font-weight: 600;
     text-align: center;
     // padding-left: 36px;
   }
@@ -159,76 +154,4 @@
     writing-mode: vertical-lr;
     transform: rotate(0.5turn);
   }
-}
-
-.content-layout {
-  // max-width: calc(100% - 64px);
-  // padding-left: 16px;
-  // max-width: calc(100% - 150px);
-  height: calc(100vh - 50px);
-  // background: #f1f1f1;
-  .adsetList{
-    padding-left: 16px;
-    padding-top: 8px;
-    width: 150px;
-    background: white;
-    // height: calc(10);
-    border-right: 1px solid rgb(217, 217, 217);
-  }
-  .contentList {
-    width: calc(100% - 150px);
-    padding: 8px 16px;
-  }
-  .multiple-visualization {
-    background: white;
-    flex: 1;
-    height: calc((100vh - 76px) / 2);
-  }
-  .detail-view {
-    flex: 1;
-
-  }
-  .table-content {
-    width: 600px;
-  }
-  .contents {
-    width: 100%;
-    height: 50%;
-  }
-  .vis-content {
-    height: 100%;
-    background: white;
-    border-radius: 4px;
-    padding: 8px;
-    border: 1px solid rgb(217, 217, 217);
-  }
-  .contnet-mg {
-    width: 48%;
-    margin-right: 2%;
-  }
-  // .visualizations {
-
-  // }
-}
-
-.flex-1 {
-  flex: 1;
-  max-width: calc(50% - 8px);
-  .c-name {
-    font-size: 14px;
-    font-weight: 600;
-    height: 22px;
-  }
-  .c-content {
-    margin-top: 6px;
-    width: 100%;
-    height: calc(100% - 36px);
-    border: 1px solid rgb(217, 217, 217);
-    border-radius: 4px;
-    background: white;
-  }
-}
-
-.ant-calendar-range-picker-input {
-  font-size: 11px !important;
 }

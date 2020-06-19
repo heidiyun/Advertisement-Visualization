@@ -33,7 +33,7 @@ export default class LineGraph extends Vue {
     space: 0,
     paddingX: 40,
     textX: 40,
-    paddingY: 10,
+    paddingY: 30,
     textY: 20,
     max: 1200
   };
@@ -100,7 +100,7 @@ export default class LineGraph extends Vue {
           .attr("cy", cy)
           .attr("fill", data.color)
           .style("stroke", "#ffffff")
-          .attr("r", 4);
+          .attr("r", 2.4);
         i++;
       });
       result.push({ points, color: data.color });
@@ -111,7 +111,7 @@ export default class LineGraph extends Vue {
         .attr("d", line(point.points))
         .attr("fill", "none")
         .style("stroke", point.color)
-        .attr("stroke-width", "1.9")
+        .attr("stroke-width", "1")
         .lower();
     });
   }
@@ -127,6 +127,7 @@ export default class LineGraph extends Vue {
           .text(`${key[1]}.${key[2]}`)
           .attr("y", this.height + this.setting.paddingY + this.setting.textY)
           .style("fill", "#888")
+          .style("font-size", 12)
           .attr(
             "x",
             this.setting.paddingX +
@@ -142,6 +143,7 @@ export default class LineGraph extends Vue {
     this.svg
       .append("text")
       .text(0)
+      .style("font-size", 12)
       .attr("y", this.height + this.setting.paddingY + 4)
       .attr("x", this.setting.paddingX * 2 - 10)
       .attr("text-anchor", "end")
@@ -163,7 +165,7 @@ export default class LineGraph extends Vue {
       )
       .attr("fill", "none")
       .style("stroke", "#eeeeee")
-      .attr("stroke-width", "1.5")
+      .attr("stroke-width", "1")
       .lower();
 
     for (let i = 1; i < 5; i++) {
@@ -194,6 +196,7 @@ export default class LineGraph extends Vue {
           "y",
           this.height + this.setting.paddingY - (i * this.height) / 4 + 4
         )
+        .style("font-size", 12)
         .attr("x", this.setting.paddingX * 2 - 10)
         .style("fill", "#888");
     }

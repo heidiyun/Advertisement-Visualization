@@ -71,7 +71,7 @@ export default class MultipleScatterPlot extends Vue {
     margin: { top: 5, bottom: 20, left: 5, right: 5 },
     width: 0,
     height: 0,
-    dotSize: 3.5,
+    dotSize: 1,
     dotCountPerAdset: 10
   };
 

@@ -5,7 +5,7 @@
         class="adset-table"
         :columns="columns"
         :data-source="filteredData"
-        :scroll="{ x: 1500, y: 332 }"
+        :scroll="{ x: 1500, y: 286 }"
         row-key="name"
         :pagination="false"
       />

@@ -133,9 +133,15 @@ export default class Table extends Vue {
         title: name,
         dataIndex: name,
         key: `${i}`,
-        height: 40,
+        height: 20,
         width:
-          name.length < 12 ? 140 : name.indexOf("costPer") !== -1 ? 220 : 190,
+          name.length < 12
+            ? name.length < 8
+              ? 105
+              : 125
+            : name.indexOf("costPer") !== -1
+            ? 195
+            : 175,
         sorter: (a: TableData, b: TableData) =>
           a.insight[name] - b.insight[name]
       };

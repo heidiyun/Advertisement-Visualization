@@ -5,7 +5,7 @@
   overflow: hidden;
   background: white !important;
   // border: 1px solid #e8e8e8;
-  font-size: 13px !important;
+  font-size: 12px !important;
   // border-collapse: collapse;
   // overflow: auto;
 
@@ -23,9 +23,10 @@
   }
 
   tr {
-    height: 30px !important;
+    height: 20px !important;
+    padding: 8px !important;
     font-weight: 500 !important;
-    font-size: 13px;
+    font-size: 12px;
   }
   .ant-table-thead > tr > th {
     background: #f4f6f8 !important;
@@ -37,4 +38,8 @@
     background: #f4f6f8 !important;
   }
 
+}
+
+.ant-table-tbody > tr > td {
+  padding: 12px !important;
 }
