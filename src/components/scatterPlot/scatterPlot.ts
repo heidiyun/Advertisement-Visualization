@@ -86,7 +86,6 @@ export default class ScatterPlot extends Vue {
 
   @Watch("$store.getters.adsetsForScatterPlot")
   private onAdsetsChange(adsets: any) {
-    console.log("change adsets", adsets);
     this.data = [];
     adsets.forEach((adset: any) => {
       adset.insights.forEach((v: [number, number], k: string) => {
@@ -103,6 +102,7 @@ export default class ScatterPlot extends Vue {
         });
       });
     });
+    console.log("change adsets", this.data);
     this.renderScatterPlot();
   }
 
@@ -132,11 +132,6 @@ export default class ScatterPlot extends Vue {
   //   // this.data = temp;
   //   this.renderScatterPlot();
   // }
-
-  private changeMetric2(value: string) {
-    this.$store.commit("setMetric2", value);
-    console.log("[CHANGE METRIC 2]", value);
-  }
 
   private initScatterPlot() {
     // x축 그리기
@@ -201,7 +196,15 @@ export default class ScatterPlot extends Vue {
       .attr("r", this.ui.dotSize)
       .style(
         "fill",
-        (d: DotType) => d.color
+        (d: DotType, i: number) => {
+          // adset i의 갯수
+          const count = this.data.filter(d => d.name === this.data[i].name)
+            .length;
+          const idx = i % count;
+          const color = d3.hsl(d.color);
+          color.l += ((1 - color.l) * (count - idx)) / (count + 1);
+          return color;
+        }
         // color change
       )
       .on("mouseover", (d: DotType) => {

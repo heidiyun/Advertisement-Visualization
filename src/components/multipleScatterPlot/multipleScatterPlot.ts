@@ -179,7 +179,15 @@ export default class MultipleScatterPlot extends Vue {
       .attr("r", this.ui.dotSize)
       .style(
         "fill",
-        (d: DotType) => d.color
+        (d: DotType, i: number) => {
+          // adset i의 갯수
+          const count = this.data.filter(d => d.name === this.data[i].name)
+            .length;
+          const idx = i % count;
+          const color = d3.hsl(d.color);
+          color.l += ((1 - color.l) * (count - idx)) / (count + 1);
+          return color;
+        }
         // color change
       );
     // .on("mouseover", (d: DotType) => {
