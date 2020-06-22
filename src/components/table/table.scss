@@ -11,6 +11,8 @@
 
   .table-wrapper{
     width: calc(100% + 20px);
+    height: 100%;
+    overflow: hidden;
   }
 
   &::-webkit-scrollbar {
@@ -19,8 +21,16 @@
   -ms-overflow-style: none;
 
   th, td {
+    overflow: hidden;
     // border-right: 1px solid #e8e8e8 !important;
   }
+
+  .ant-table td { white-space: nowrap; }
+
+  // .ant-table-scroll {
+  //   width: max-content;
+  //   height: max-content;
+  // }
 
   tr {
     height: 20px !important;

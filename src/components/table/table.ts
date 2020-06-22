@@ -71,6 +71,11 @@ export default class Table extends Vue {
     sorter?: (a: any, b: any) => number;
   }> = [];
 
+  public uiLength = {
+    x: 1500,
+    y: 346
+  };
+  public uiIf = false;
   public data = [];
   public filteredData: TableData[] = [];
 
@@ -111,6 +116,11 @@ export default class Table extends Vue {
     this.filteredData = result;
   }
 
+  public mounted() {
+    this.uiLength.y =
+      document.getElementsByClassName("table-wrapper")[0].clientHeight - 30;
+  }
+
   public numToString(num: number) {
     const str = num.toString();
     const strCut = str.indexOf(".") === -1 ? str : num.toFixed(2).toString();
@@ -122,7 +132,6 @@ export default class Table extends Vue {
       {
         title: "id",
         width: 100,
-        height: 30,
         dataIndex: "name",
         key: "name",
         fixed: "left"
@@ -133,14 +142,13 @@ export default class Table extends Vue {
         title: name,
         dataIndex: name,
         key: `${i}`,
-        height: 20,
         width:
           name.length < 12
             ? name.length < 8
               ? 105
               : 130
             : name.indexOf("costPer") !== -1
-            ? 195
+            ? 205
             : 175,
         sorter: (a: TableData, b: TableData) =>
           a.insight[name] - b.insight[name]
